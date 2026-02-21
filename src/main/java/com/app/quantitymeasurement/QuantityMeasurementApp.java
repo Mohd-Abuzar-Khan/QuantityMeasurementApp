@@ -2,28 +2,38 @@ package com.app.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
-    public static boolean compareFeet(double v1, double v2) {
-        Feet f1 = new Feet(v1);
-        Feet f2 = new Feet(v2);
-        return f1.equals(f2);
+    public static boolean demonstrateLengthEquality(Length l1, Length l2) {
+        return l1.equals(l2);
     }
 
-    public static boolean compareInches(double v1, double v2) {
-        Inches i1 = new Inches(v1);
-        Inches i2 = new Inches(v2);
-        return i1.equals(i2);
+    public static void demonstrateFeetEquality() {
+        Length length1 = new Length(1.0, LengthUnit.FEET);
+        Length length2 = new Length(1.0, LengthUnit.FEET);
+
+        System.out.println(length1 + " and " + length2 +
+                " Equal: " + demonstrateLengthEquality(length1, length2));
+    }
+
+    public static void demonstrateInchesEquality() {
+        Length length1 = new Length(1.0, LengthUnit.INCHES);
+        Length length2 = new Length(1.0, LengthUnit.INCHES);
+
+        System.out.println(length1 + " and " + length2 +
+                " Equal: " + demonstrateLengthEquality(length1, length2));
+    }
+
+    public static void demonstrateFeetInchesComparison() {
+        Length length1 = new Length(1.0, LengthUnit.FEET);
+        Length length2 = new Length(12.0, LengthUnit.INCHES);
+
+        System.out.println(length1 + " and " + length2 +
+                " Equal: " + demonstrateLengthEquality(length1, length2));
     }
 
     public static void main(String[] args) {
 
-
-        boolean feetResult = compareFeet(1.0, 1.0);
-        boolean inchResult = compareInches(1.0, 1.0);
-
-        System.out.println("Input: 1.0 ft and 1.0 ft");
-        System.out.println("Output: Equal (" + feetResult + ")");
-
-        System.out.println("Input: 1.0 inch and 1.0 inch");
-        System.out.println("Output: Equal (" + inchResult + ")");
+        demonstrateFeetEquality();
+        demonstrateInchesEquality();
+        demonstrateFeetInchesComparison();
     }
 }
