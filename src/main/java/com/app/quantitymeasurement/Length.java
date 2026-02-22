@@ -5,6 +5,9 @@ import java.util.Objects;
 // Generic Length class applying DRY principle
 public class Length {
 
+    private static final double ROUNDING_FACTOR = 100.0;
+
+
     private final double value;
     private final LengthUnit unit;
 
@@ -14,8 +17,6 @@ public class Length {
         this.value = value;
         this.unit = unit;
     }
-
-
 
 
     // Conversion Methods
@@ -37,6 +38,32 @@ public class Length {
         return new Length(convertedValue, targetUnit);
     }
 
+
+    private double convertFromBaseToTargetUnit(double lengthInBase, LengthUnit targetUnit) {
+        
+        validateUnit(targetUnit);
+        double result = lengthInBase / targetUnit.getConversionFactor();
+        return round(result);
+
+    }
+
+
+
+
+    // Method to Add two unit of different unit
+    public Length add(Length thatLength) {
+
+        if (thatLength == null) {
+            throw new IllegalArgumentException("Length to add cannot be null");
+        }
+
+        double base1 = this.convertToBaseUnit();
+        double base2 = thatLength.convertToBaseUnit();
+        double sumInBase = base1 + base2;
+        double result = convertFromBaseToTargetUnit(sumInBase, this.unit);
+        
+        return new Length(result, this.unit);
+    }
 
 
     // Equality and Comparison Methods
@@ -93,5 +120,11 @@ public class Length {
         if (!Double.isFinite(value)) {
             throw new IllegalArgumentException("Value must be finite");
         }
+    }
+
+
+    // Utiltiy for Rounding
+    private static double round(double value) {
+        return Math.round(value * ROUNDING_FACTOR) / ROUNDING_FACTOR;
     }
 }
