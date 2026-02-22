@@ -48,8 +48,6 @@ public class Length {
     }
 
 
-
-
     // Method to Add two unit of different unit
     public Length add(Length thatLength) {
 
@@ -63,6 +61,31 @@ public class Length {
         double result = convertFromBaseToTargetUnit(sumInBase, this.unit);
         
         return new Length(result, this.unit);
+    }
+
+
+    // Explicit Target Unit Addition
+    public static Length add(Length l1, Length l2, Length targetUnit) {
+        throw new UnsupportedOperationException("Incorrect method signature");
+    }
+    
+    public static Length add(Length l1, Length l2, LengthUnit targetUnit) {
+    
+        validateOperand(l1);
+        validateOperand(l2);
+        validateUnit(targetUnit);
+    
+        return addInternal(l1, l2, targetUnit);
+    }
+
+    private static Length addInternal(Length l1, Length l2, LengthUnit targetUnit) {
+
+        double base1 = l1.convertToBaseUnit();
+        double base2 = l2.convertToBaseUnit();
+        double baseSum = base1 + base2;
+        double resultValue = baseSum / targetUnit.getConversionFactor();
+    
+        return new Length(resultValue, targetUnit);
     }
 
 
@@ -97,7 +120,7 @@ public class Length {
                 other.convertToBaseUnit()
         ) == 0;
     }
-    
+
 
     @Override
     public int hashCode() {
@@ -108,6 +131,7 @@ public class Length {
     public String toString() {
         return "Quantity(" + value + ", " + unit + ")";
     }
+
 
 
     // Validation Methods for Lengths 
@@ -122,10 +146,16 @@ public class Length {
             throw new IllegalArgumentException("Value must be finite");
         }
     }
+    private static void validateOperand(Length length) {
+        if (length == null) {
+            throw new IllegalArgumentException("Length cannot be null");
+        }
+    }
 
 
     // Utiltiy for Rounding
-    private static double round(double value) {
+    public static double round(double value) {
         return Math.round(value * ROUNDING_FACTOR) / ROUNDING_FACTOR;
     }
+
 }
