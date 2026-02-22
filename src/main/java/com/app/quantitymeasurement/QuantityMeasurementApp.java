@@ -13,7 +13,6 @@ public class QuantityMeasurementApp {
                 " Equal: " + demonstrateLengthEquality(l1, l2));
     }
 
-
     public static void demonstrateLengthConversion( double value, LengthUnit fromUnit, LengthUnit toUnit) {
     // Unit to Unit Conversion    
     System.out.println(value + " " + fromUnit + " is " + Length.convert(value, fromUnit, toUnit) + " " + toUnit);

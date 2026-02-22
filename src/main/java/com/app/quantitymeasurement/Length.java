@@ -97,6 +97,7 @@ public class Length {
                 other.convertToBaseUnit()
         ) == 0;
     }
+    
 
     @Override
     public int hashCode() {
