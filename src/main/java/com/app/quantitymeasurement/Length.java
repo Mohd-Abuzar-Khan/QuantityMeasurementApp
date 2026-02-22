@@ -51,7 +51,7 @@ public class Length {
     public int hashCode() {
         return Objects.hash(convertToBaseUnit());
     }
-
+    
     @Override
     public String toString() {
         return "Quantity(" + value + ", " + unit + ")";
