@@ -9,13 +9,37 @@ public class Length {
     private final LengthUnit unit;
 
     public Length(double value, LengthUnit unit) {
-        if (unit == null) {
-            throw new IllegalArgumentException("Unit cannot be null");
-        }
+        validateValue(value);
+        validateUnit(unit);
         this.value = value;
         this.unit = unit;
     }
 
+
+
+
+    // Conversion Methods
+    public static double convert(double value, LengthUnit source, LengthUnit target) {
+
+        validateValue(value);
+        validateUnit(source);
+        validateUnit(target);
+
+        if (source == target) {
+            return value;
+        }
+
+        return value * (source.getConversionFactor() / target.getConversionFactor());
+    }
+
+    public Length convertTo(LengthUnit targetUnit) {
+        double convertedValue = convert(this.value, this.unit, targetUnit);
+        return new Length(convertedValue, targetUnit);
+    }
+
+
+
+    // Equality and Comparison Methods
     private double convertToBaseUnit() {
         return this.value * unit.getConversionFactor();
     }
@@ -55,5 +79,19 @@ public class Length {
     @Override
     public String toString() {
         return "Quantity(" + value + ", " + unit + ")";
+    }
+
+
+    // Validation Methods for Lengths 
+    private static void validateUnit(LengthUnit unit) {
+        if (unit == null) {
+            throw new IllegalArgumentException("Unit cannot be null");
+        }
+    }
+
+    private static void validateValue(double value) {
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("Value must be finite");
+        }
     }
 }
