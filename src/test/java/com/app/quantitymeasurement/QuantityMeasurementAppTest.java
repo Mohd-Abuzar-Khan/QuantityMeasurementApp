@@ -14,20 +14,17 @@ class QuantityMeasurementAppTest {
 
         @Test
         void shouldBeEqual_whenSameValueAndUnit() {
-            assertEquals(length(5, LengthUnit.FEET),
-                         length(5, LengthUnit.FEET));
+            assertEquals(length(5, LengthUnit.FEET),length(5, LengthUnit.FEET));
         }
 
         @Test
         void shouldNotBeEqual_whenDifferentValue() {
-            assertNotEquals(length(5, LengthUnit.FEET),
-                            length(6, LengthUnit.FEET));
+            assertNotEquals(length(5, LengthUnit.FEET),length(6, LengthUnit.FEET));
         }
 
         @Test
         void shouldBeEqual_whenCrossUnitEquivalent() {
-            assertEquals(length(1, LengthUnit.FEET),
-                         length(12, LengthUnit.INCHES));
+            assertEquals(length(1, LengthUnit.FEET), length(12, LengthUnit.INCHES));
         }
 
         @Test
@@ -45,22 +42,20 @@ class QuantityMeasurementAppTest {
         }
     }
 
+
     // UC5 : UNIT CONVERSION
     @Nested
     class LengthConversionTests {
 
         @Test
         void shouldConvertFeetToInches() {
-            Length result = length(3, LengthUnit.FEET)
-                    .convertTo(LengthUnit.INCHES);
-
+            Length result = length(3, LengthUnit.FEET).convertTo(LengthUnit.INCHES);
             assertEquals(length(36, LengthUnit.INCHES), result);
         }
 
         @Test
         void shouldConvertCmToFeet() {
             Length result = length(30.48, LengthUnit.CENTIMETERS).convertTo(LengthUnit.FEET);
-
             assertEquals(length(1, LengthUnit.FEET), result);
         }
     }
@@ -72,24 +67,19 @@ class QuantityMeasurementAppTest {
 
         @Test
         void shouldAddSameUnit() {
-            Length result = length(2, LengthUnit.FEET)
-                    .add(length(3, LengthUnit.FEET));
-
+            Length result = length(2, LengthUnit.FEET).add(length(3, LengthUnit.FEET));
             assertEquals(length(5, LengthUnit.FEET), result);
         }
 
         @Test
         void shouldAddCrossUnit() {
-            Length result = length(1, LengthUnit.FEET)
-                    .add(length(6, LengthUnit.INCHES));
-
+            Length result = length(1, LengthUnit.FEET).add(length(6, LengthUnit.INCHES));
             assertEquals(length(1.5, LengthUnit.FEET), result);
         }
 
         @Test
         void shouldThrowException_whenAddingNull() {
-            assertThrows(IllegalArgumentException.class,
-                    () -> length(1, LengthUnit.FEET).add(null));
+            assertThrows(IllegalArgumentException.class, () -> length(1, LengthUnit.FEET).add(null));
         }
     }
 
