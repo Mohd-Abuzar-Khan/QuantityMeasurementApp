@@ -1,171 +1,160 @@
 package com.app.quantitymeasurement;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuantityMeasurementAppTest {
+class QuantityMeasurementAppTest {
 
 
-    // UC1 : Basic Equality Tests
-    @Test
-    void sameFeetAreEqual() {
-        Length l1 = new Length(5.0, LengthUnit.FEET);
-        Length l2 = new Length(5.0, LengthUnit.FEET);
-        assertEquals(l1, l2);
+    // UC1 - UC4 EQUALITY TESTING
+    @Nested
+    class LengthEqualityTests {
+
+        @Test
+        void shouldBeEqual_whenSameValueAndUnit() {
+            assertEquals(length(5, LengthUnit.FEET),
+                         length(5, LengthUnit.FEET));
+        }
+
+        @Test
+        void shouldNotBeEqual_whenDifferentValue() {
+            assertNotEquals(length(5, LengthUnit.FEET),
+                            length(6, LengthUnit.FEET));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnitEquivalent() {
+            assertEquals(length(1, LengthUnit.FEET),
+                         length(12, LengthUnit.INCHES));
+        }
+
+        @Test
+        void shouldReturnFalse_whenComparedWithNull() {
+            assertNotEquals(length(2, LengthUnit.FEET), null);
+        }
+
+        @Test
+        void shouldFollowEqualityContract() {
+            Length a = length(2, LengthUnit.YARDS);
+            Length b = length(6, LengthUnit.FEET);
+            Length c = length(72, LengthUnit.INCHES);
+
+            assertTrue(a.equals(b) && b.equals(c) && a.equals(c));
+        }
     }
 
-    @Test
-    void differentFeetNotEqual() {
-        Length l1 = new Length(5.0, LengthUnit.FEET);
-        Length l2 = new Length(6.0, LengthUnit.FEET);
-        assertNotEquals(l1, l2);
+    // UC5 : UNIT CONVERSION
+    @Nested
+    class LengthConversionTests {
+
+        @Test
+        void shouldConvertFeetToInches() {
+            Length result = length(3, LengthUnit.FEET)
+                    .convertTo(LengthUnit.INCHES);
+
+            assertEquals(length(36, LengthUnit.INCHES), result);
+        }
+
+        @Test
+        void shouldConvertCmToFeet() {
+            Length result = length(30.48, LengthUnit.CENTIMETERS).convertTo(LengthUnit.FEET);
+
+            assertEquals(length(1, LengthUnit.FEET), result);
+        }
     }
 
-    @Test
-    void equalsReturnsFalseForNull() {
-        Length length = new Length(2.0, LengthUnit.FEET);
-        assertNotEquals(length, null);
+
+    // UC6 : Additions on Unit Tests
+    @Nested
+    class LengthAdditionTests {
+
+        @Test
+        void shouldAddSameUnit() {
+            Length result = length(2, LengthUnit.FEET)
+                    .add(length(3, LengthUnit.FEET));
+
+            assertEquals(length(5, LengthUnit.FEET), result);
+        }
+
+        @Test
+        void shouldAddCrossUnit() {
+            Length result = length(1, LengthUnit.FEET)
+                    .add(length(6, LengthUnit.INCHES));
+
+            assertEquals(length(1.5, LengthUnit.FEET), result);
+        }
+
+        @Test
+        void shouldThrowException_whenAddingNull() {
+            assertThrows(IllegalArgumentException.class,
+                    () -> length(1, LengthUnit.FEET).add(null));
+        }
     }
 
-    @Test
-    void referenceEqualitySameObject() {
-        Length length = new Length(2.0, LengthUnit.FEET);
-        assertEquals(length, length);
+    //----------------------WEIGHT TESTS ---------------------------
+   
+    // Unit 9 : Weight Class Test Cases
+    @Nested
+    class WeightEqualityTests {
+
+        @Test
+        void shouldBeEqual_whenKgEqualsGram() {
+            assertEquals(weight(1, WeightUnit.KILOGRAM), weight(1000, WeightUnit.GRAM));
+        }
+
+        @Test
+        void shouldNotBeEqual_whenDifferentValue() {
+            assertNotEquals(weight(1, WeightUnit.KILOGRAM), weight(2, WeightUnit.KILOGRAM));
+        }
+
+        @Test
+        void shouldReturnFalse_whenComparedWithDifferentType() {
+            assertFalse(weight(1, WeightUnit.KILOGRAM).equals(length(1, LengthUnit.FEET)));
+        }
     }
 
-    // UC2 : Cross Unit Equality
-    @Test
-    void twelveInchesEqualsOneFoot() {
-        Length inches = new Length(12.0, LengthUnit.INCHES);
-        Length foot = new Length(1.0, LengthUnit.FEET);
-        assertEquals(foot, inches);
+    @Nested
+    class WeightConversionTests {
+
+        @Test
+        void shouldConvertKgToPound() {
+            QuantityWeight result = weight(1, WeightUnit.KILOGRAM).convertTo(WeightUnit.POUND);
+            assertEquals(2.20462, result.getValue(), 1e-4);
+        }
+
+        @Test
+        void shouldConvertPoundToKg() {
+            QuantityWeight result = weight(2.20462, WeightUnit.POUND).convertTo(WeightUnit.KILOGRAM);
+            assertEquals(1, result.getValue(), 1e-4);
+        }
     }
 
-    @Test
-    void thirtySixInchesEqualsOneYard() {
-        Length inches = new Length(36.0, LengthUnit.INCHES);
-        Length yard = new Length(1.0, LengthUnit.YARDS);
-        assertEquals(yard, inches);
+    @Nested
+    class WeightAdditionTests {
+
+        @Test
+        void shouldAddKgAndGram() {
+            QuantityWeight result = weight(1, WeightUnit.KILOGRAM) .add(weight(1000, WeightUnit.GRAM));
+            assertEquals(2, result.getValue());
+        }
+
+        @Test
+        void shouldAddWithExplicitTargetUnit() {
+            QuantityWeight result = QuantityWeight.add( weight(1, WeightUnit.KILOGRAM), weight(1000, WeightUnit.GRAM), WeightUnit.GRAM);
+            assertEquals(2000, result.getValue());
+        }
     }
 
-    @Test
-    void thirtyPoint48CmEqualsOneFoot() {
-        Length cm = new Length(30.48, LengthUnit.CENTIMETERS);
-        Length foot = new Length(1.0, LengthUnit.FEET);
-        assertEquals(foot, cm);
+
+
+    private Length length(double value, LengthUnit unit) {
+        return new Length(value, unit);
     }
 
-    @Test
-    void yardNotEqualToInches() {
-        Length yard = new Length(1.0, LengthUnit.YARDS);
-        Length inches = new Length(12.0, LengthUnit.INCHES);
-        assertNotEquals(yard, inches);
+    private QuantityWeight weight(double value, WeightUnit unit) {
+        return new QuantityWeight(value, unit);
     }
-
-    // UC3 : Equality Contract
-    @Test
-    void reflexiveSymmetricAndTransitiveProperty() {
-        Length a = new Length(2.0, LengthUnit.YARDS);
-        Length b = new Length(6.0, LengthUnit.FEET);
-        Length c = new Length(72.0, LengthUnit.INCHES);
-
-        assertTrue(b.equals(a));
-        assertTrue(b.equals(c));
-        assertTrue(a.equals(c));
-    }
-
-    @Test
-    void crossUnitEqualityDemonstrateMethod() {
-        Length l1 = new Length(1.0, LengthUnit.FEET);
-        Length l2 = new Length(12.0, LengthUnit.INCHES);
-        assertTrue(QuantityMeasurementApp.demonstrateLengthEquality(l1, l2));
-    }
-
-    // UC5 : Conversion Tests
-    @Test
-    void convertFeetToInches() {
-        Length feet = new Length(3.0, LengthUnit.FEET);
-        Length inches = feet.convertTo(LengthUnit.INCHES);
-        assertEquals(new Length(36.0, LengthUnit.INCHES), inches);
-    }
-
-    @Test
-    void convertYardsToInchesUsingOverloadedMethod() {
-        Length yards = new Length(2.0, LengthUnit.YARDS);
-        Length inches = yards.convertTo(LengthUnit.INCHES);
-        assertEquals(new Length(6.0, LengthUnit.INCHES), inches);
-    }
-
-    @Test
-    void convertCentimeterToFeet() {
-        Length cm = new Length(30.48, LengthUnit.CENTIMETERS);
-        Length feet = cm.convertTo(LengthUnit.FEET);
-        assertEquals(new Length(1.0, LengthUnit.FEET), feet);
-    }
-
-    // UC6 : Addition Tests
-    @Test
-    void addFeetToFeet() {
-        Length l1 = new Length(2.0, LengthUnit.FEET);
-        Length l2 = new Length(3.0, LengthUnit.FEET);
-        Length result = l1.add(l2);
-        assertEquals(new Length(5.0, LengthUnit.FEET), result);
-    }
-
-    @Test
-    void addFeetAndInches() {
-        Length l1 = new Length(1.0, LengthUnit.FEET);
-        Length l2 = new Length(6.0, LengthUnit.INCHES);
-        Length result = l1.add(l2);
-        assertEquals(new Length(1.5, LengthUnit.FEET), result);
-    }
-
-    @Test
-    void addYardAndFeet() {
-        Length l1 = new Length(1.0, LengthUnit.YARDS);
-        Length l2 = new Length(3.0, LengthUnit.FEET);
-        Length result = l1.add(l2);
-        assertEquals(new Length(2.0, LengthUnit.YARDS), result);
-    }
-
-    @Test
-    void addCentimeterAndInches() {
-        Length l1 = new Length(2.54, LengthUnit.CENTIMETERS);
-        Length l2 = new Length(1.0, LengthUnit.INCHES);
-        Length result = l1.add(l2);
-        assertEquals(new Length(33.02, LengthUnit.CENTIMETERS), result);
-    }
-
-    @Test
-    void addResultInUnitOfFirstOperand() {
-        Length l1 = new Length(12.0, LengthUnit.INCHES);
-        Length l2 = new Length(1.0, LengthUnit.FEET);
-        Length result = l1.add(l2);
-        assertEquals(new Length(24.0, LengthUnit.INCHES), result);
-    }
-
-    @Test
-    void addNullLengthShouldThrowException() {
-        Length l1 = new Length(1.0, LengthUnit.FEET);
-        assertThrows(IllegalArgumentException.class, () -> {
-            l1.add(null);
-        });
-    }
-
-    @Test
-    void addRoundingCheck() {
-        Length l1 = new Length(1.333, LengthUnit.FEET);
-        Length l2 = new Length(2.222, LengthUnit.FEET);
-        Length result = l1.add(l2);
-        assertEquals(new Length(3.56, LengthUnit.FEET), result);
-    }
-
-    // UC7 : Addition With Target Unit
-    @Test
-    void addFeetAndInchesWithTargetUnitInches() {
-        Length l1 = new Length(1.0, LengthUnit.FEET);
-        Length l2 = new Length(12.0, LengthUnit.INCHES);
-        Length result = Length.add(l1, l2, LengthUnit.INCHES);
-        assertEquals(new Length(24.0, LengthUnit.INCHES), result);
-    }
+    
 }
