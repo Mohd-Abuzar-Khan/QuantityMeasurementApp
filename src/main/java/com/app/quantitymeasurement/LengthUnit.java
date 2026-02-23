@@ -2,30 +2,29 @@ package com.app.quantitymeasurement;
 
 public enum LengthUnit {
 
-    FEET(1.0),                 
-    INCHES(1.0 / 12.0),
-    YARDS(3.0),
-    CENTIMETERS(1.0 / 30.48);
+    INCHES(1.0),                  
+    FEET(12.0),                   
+    YARDS(36.0),                  
+    CENTIMETERS(1.0 / 2.54);      
 
-    private final double conversionFactorToFeet;
+    private final double conversionFactorToInches;
 
-    LengthUnit(double conversionFactorToFeet) {
-        this.conversionFactorToFeet = conversionFactorToFeet;
+    LengthUnit(double conversionFactorToInches) {
+        this.conversionFactorToInches = conversionFactorToInches;
     }
 
     public double getConversionFactor() {
-        return conversionFactorToFeet;
+        return conversionFactorToInches;
     }
-
-    // Single Risponsiblity Principle for Easy Integration of new class
     public double convertToBaseUnit(double value) {
         validate(value);
-        return value * conversionFactorToFeet;
+        return value * conversionFactorToInches;
     }
     public double convertFromBaseUnit(double baseValue) {
         validate(baseValue);
-        return baseValue / conversionFactorToFeet;
+        return baseValue / conversionFactorToInches;
     }
+
     private static void validate(double value) {
         if (!Double.isFinite(value)) {
             throw new IllegalArgumentException("Value must be finite");
