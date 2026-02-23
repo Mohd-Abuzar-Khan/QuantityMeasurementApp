@@ -5,6 +5,9 @@ import java.util.Objects;
 // Generic Length class applying DRY principle
 public class Length {
 
+
+    private static final double EPSILON = 1e-6;
+
     private final double value;
     private final LengthUnit unit;
 
@@ -32,19 +35,16 @@ public class Length {
 
     @Override
     public boolean equals(Object obj) {
-
+    
         if (this == obj)
             return true;
-
-        if (obj == null || getClass() != obj.getClass())
+    
+        if (!(obj instanceof Length other))
             return false;
-
-        Length other = (Length) obj;
-
-        return Double.compare(
-                this.convertToBaseUnit(),
-                other.convertToBaseUnit()
-        ) == 0;
+    
+        return Math.abs(
+                this.convertToBaseUnit() - other.convertToBaseUnit()
+        ) < EPSILON;
     }
 
     @Override
