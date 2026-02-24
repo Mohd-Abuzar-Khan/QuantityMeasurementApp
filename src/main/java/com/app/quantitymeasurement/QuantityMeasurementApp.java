@@ -3,40 +3,40 @@ package com.app.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
-    // Delegates to equals() and returns the boolean result
+    // Delegates to equals() From UC1 - UC4
     public static <U extends IMeasurable> boolean demonstrateEquality(
             Quantity<U> q1, Quantity<U> q2) {
         return q1.equals(q2);
     }
 
-    // Prints equality result for two quantities of the same unit type
+    // Prints equality result
     private static <U extends IMeasurable> void checkEquality(
             Quantity<U> q1, Quantity<U> q2) {
         System.out.println(q1 + " and " + q2 +
                 " Equal: " + demonstrateEquality(q1, q2));
     }
 
-    // Unit-to-unit conversion: creates a Quantity from value + fromUnit and converts to toUnit
+    // Unit-to-unit conversion From UC5
     public static <U extends IMeasurable> void demonstrateConversion(double value, U fromUnit, U toUnit) {
         Quantity<U> q = new Quantity<>(value, fromUnit);
         System.out.println(value + " " + fromUnit.getUnitName() +
                 " is " + q.convertTo(toUnit).getValue() + " " + toUnit.getUnitName());
     }
 
-    // Quantity-to-quantity conversion: converts an existing Quantity to the target unit
+    // Quantity-to-quantity conversion From UC5
     public static <U extends IMeasurable> void demonstrateConversion( Quantity<U> q, U toUnit) {
         System.out.println(q + " converted to " +
                 toUnit.getUnitName() + " is " + q.convertTo(toUnit));
     }
 
-    // Implicit addition: result unit defaults to the first operand's unit
+    // Implicit addition From UC7
     public static <U extends IMeasurable> void demonstrateAddition( double value1, U unit1, double value2, U unit2) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
         System.out.println(q1 + " + " + q2 + " = " + q1.add(q2));
     }
 
-    // Explicit addition: result is expressed in the specified target unit
+    // Explicit addition From UC11
     public static <U extends IMeasurable> void demonstrateAddition( double value1, U unit1, double value2, U unit2, U targetUnit) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
@@ -44,14 +44,14 @@ public class QuantityMeasurementApp {
                 targetUnit.getUnitName() + ") → " + Quantity.add(q1, q2, targetUnit));
     }
 
-    // Implicit subtraction: result unit defaults to the first operand's unit.
+    // Implicit subtraction From UC12
     public static <U extends IMeasurable> void demonstrateSubtraction( double value1, U unit1, double value2, U unit2) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
         System.out.println(q1 + " - " + q2 + " = " + q1.subtract(q2));
     }
 
-    // Explicit subtraction: result is expressed in the specified target unit
+    // Explicit subtraction From UC12
     public static <U extends IMeasurable> void demonstrateSubtraction( double value1, U unit1, double value2, U unit2, U targetUnit) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
@@ -59,7 +59,7 @@ public class QuantityMeasurementApp {
                 targetUnit.getUnitName() + ") → " + q1.subtract(q2, targetUnit));
     }
 
-    // Division returns a dimensionless scalar ratio — no unit on the result.
+    // Division From UC12
     public static <U extends IMeasurable> void demonstrateDivision( double value1, U unit1, double value2, U unit2) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
