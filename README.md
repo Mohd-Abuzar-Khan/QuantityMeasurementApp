@@ -3,7 +3,7 @@
 A Java-based application that demonstrates measurement equality comparison using object-oriented principles.
 
 ---
-# UC1: Feet Measurement Equality
+## UC1: Feet Measurement Equality
 
 ## Description
 Checks equality of two numerical values in feet, handling null, type mismatch, and floating-point precision.
@@ -20,7 +20,7 @@ Checks equality of two numerical values in feet, handling null, type mismatch, a
 
 ---
 
-# UC2: Feet and Inches Measurement Equality
+## UC2: Feet and Inches Measurement Equality
 
 ## Description
 Extends UC1 to support equality checks for both Feet and Inches independently using separate classes. Reduces main method dependency via static helper methods.
