@@ -1,33 +1,35 @@
 package com.app.quantitymeasurement;
 
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable {
 
-    GRAM(1.0),
-    KILOGRAM(1000.0),
-    POUND(453.592);
+    KILOGRAM(1.0),
+    GRAM(0.001),
+    TONNE(1000.0),
+    POUND(0.453592);
 
-    private final double conversionFactorToGram;
+    private final double conversionFactor;
 
-    WeightUnit(double conversionFactorToGram) {
-        this.conversionFactorToGram = conversionFactorToGram;
+    WeightUnit(double conversionFactor) {
+        this.conversionFactor = conversionFactor;
     }
 
+    @Override
     public double getConversionFactor() {
-        return conversionFactorToGram;
+        return conversionFactor;
     }
 
+    @Override
     public double convertToBaseUnit(double value) {
-        validate(value);
-        return value * conversionFactorToGram;
-    }
-    public double convertFromBaseUnit(double baseValue) {
-        validate(baseValue);
-        return baseValue / conversionFactorToGram;
+        return value * conversionFactor;
     }
 
-    private static void validate(double value) {
-        if (!Double.isFinite(value)) {
-            throw new IllegalArgumentException("Value must be finite");
-        }
+    @Override
+    public double convertFromBaseUnit(double baseValue) {
+        return baseValue / conversionFactor;
+    }
+
+    @Override
+    public String getUnitName() {
+        return this.name();
     }
 }
