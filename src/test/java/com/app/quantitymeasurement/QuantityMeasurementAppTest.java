@@ -19,6 +19,10 @@ class QuantityTest {
         return new Quantity<>(value, unit);
     }
 
+    private Quantity<TemperatureUnit> temp(double value, TemperatureUnit unit) {
+        return new Quantity<>(value, unit);
+    }
+
     @SuppressWarnings("unchecked")
     private <A extends IMeasurable, B extends IMeasurable> void subtractCrossCategory(
             Quantity<A> q1, Quantity<B> q2) {
@@ -796,6 +800,452 @@ class QuantityTest {
             a.divide(b);
             assertEquals(length(10, LengthUnit.FEET), a);
             assertEquals(length(3, LengthUnit.FEET), b);
+        }
+    }
+
+    @Nested
+    class TemperatureEqualityTests {
+
+        @Test
+        void shouldBeEqual_whenSameCelsiusValue() {
+            assertEquals(temp(25.0, TemperatureUnit.CELSIUS), temp(25.0, TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldBeEqual_whenSameFahrenheitValue() {
+            assertEquals(temp(32.0, TemperatureUnit.FAHRENHEIT), temp(32.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldBeEqual_whenSameKelvinValue() {
+            assertEquals(temp(273.15, TemperatureUnit.KELVIN), temp(273.15, TemperatureUnit.KELVIN));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_0Celsius_equals_32Fahrenheit() {
+            assertEquals(temp(0.0, TemperatureUnit.CELSIUS), temp(32.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_100Celsius_equals_212Fahrenheit() {
+            assertEquals(temp(100.0, TemperatureUnit.CELSIUS), temp(212.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_Negative40_equalPoint() {
+            assertEquals(temp(-40.0, TemperatureUnit.CELSIUS), temp(-40.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_0Celsius_equals_27315Kelvin() {
+            assertEquals(temp(0.0, TemperatureUnit.CELSIUS), temp(273.15, TemperatureUnit.KELVIN));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_100Celsius_equals_37315Kelvin() {
+            assertEquals(temp(100.0, TemperatureUnit.CELSIUS), temp(373.15, TemperatureUnit.KELVIN));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_27315Kelvin_equals_32Fahrenheit() {
+            assertEquals(temp(273.15, TemperatureUnit.KELVIN), temp(32.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldBeEqual_whenCrossUnit_50Celsius_equals_122Fahrenheit() {
+            assertEquals(temp(50.0, TemperatureUnit.CELSIUS), temp(122.0, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldFollowSymmetricProperty() {
+            Quantity<TemperatureUnit> celsius = temp(0.0, TemperatureUnit.CELSIUS);
+            Quantity<TemperatureUnit> fahrenheit = temp(32.0, TemperatureUnit.FAHRENHEIT);
+            assertTrue(celsius.equals(fahrenheit) && fahrenheit.equals(celsius));
+        }
+
+        @Test
+        void shouldFollowReflexiveProperty() {
+            Quantity<TemperatureUnit> t = temp(100.0, TemperatureUnit.CELSIUS);
+            assertEquals(t, t);
+        }
+
+        @Test
+        void shouldFollowTransitiveProperty() {
+            Quantity<TemperatureUnit> a = temp(0.0, TemperatureUnit.CELSIUS);
+            Quantity<TemperatureUnit> b = temp(32.0, TemperatureUnit.FAHRENHEIT);
+            Quantity<TemperatureUnit> c = temp(273.15, TemperatureUnit.KELVIN);
+            assertTrue(a.equals(b) && b.equals(c) && a.equals(c));
+        }
+
+        @Test
+        void shouldNotBeEqual_whenDifferentCelsiusValues() {
+            assertNotEquals(temp(50.0, TemperatureUnit.CELSIUS), temp(100.0, TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldReturnFalse_whenComparedWithNull() {
+            assertNotEquals(temp(100.0, TemperatureUnit.CELSIUS), null);
+        }
+
+        @Test
+        void shouldBeEqual_whenAbsoluteZero_acrossUnits() {
+            // −273.15°C = 0 K = −459.67°F
+            assertEquals(temp(-273.15, TemperatureUnit.CELSIUS), temp(0.0, TemperatureUnit.KELVIN));
+        }
+    }
+
+
+    // UC14: Temperature conversion accuracy
+    @Nested
+    class TemperatureConversionTests {
+
+        @Test
+        void shouldConvertCelsiusToFahrenheit_boilingPoint() {
+            assertEquals(212.0,
+                    temp(100.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.FAHRENHEIT).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertFahrenheitToCelsius_freezingPoint() {
+            assertEquals(0.0,
+                    temp(32.0, TemperatureUnit.FAHRENHEIT).convertTo(TemperatureUnit.CELSIUS).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertKelvinToCelsius_freezingPoint() {
+            assertEquals(0.0,
+                    temp(273.15, TemperatureUnit.KELVIN).convertTo(TemperatureUnit.CELSIUS).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertCelsiusToKelvin_freezingPoint() {
+            assertEquals(273.15,
+                    temp(0.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.KELVIN).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertCelsiusToFahrenheit_equalPoint() {
+            assertEquals(-40.0,
+                    temp(-40.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.FAHRENHEIT).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertFahrenheitToKelvin_boilingPoint() {
+            assertEquals(373.15,
+                    temp(212.0, TemperatureUnit.FAHRENHEIT).convertTo(TemperatureUnit.KELVIN).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldConvertCelsiusToFahrenheit_bodyTemp() {
+            assertEquals(98.6,
+                    temp(37.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.FAHRENHEIT).getValue(), 0.01);
+        }
+
+        @Test
+        void shouldConvertCelsiusToFahrenheit_negativeValue() {
+            assertEquals(-4.0,
+                    temp(-20.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.FAHRENHEIT).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldReturnSameInstance_whenConvertingToSameUnit() {
+            Quantity<TemperatureUnit> original = temp(100.0, TemperatureUnit.CELSIUS);
+            assertSame(original, original.convertTo(TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldSatisfyRoundTrip_CelsiusToFahrenheitAndBack() {
+            double original = 37.0;
+            double roundTripped = temp(original, TemperatureUnit.CELSIUS)
+                    .convertTo(TemperatureUnit.FAHRENHEIT)
+                    .convertTo(TemperatureUnit.CELSIUS)
+                    .getValue();
+            assertEquals(original, roundTripped, 1e-9);
+        }
+
+        @Test
+        void shouldSatisfyRoundTrip_CelsiusToKelvinAndBack() {
+            double original = 100.0;
+            double roundTripped = temp(original, TemperatureUnit.CELSIUS)
+                    .convertTo(TemperatureUnit.KELVIN)
+                    .convertTo(TemperatureUnit.CELSIUS)
+                    .getValue();
+            assertEquals(original, roundTripped, 1e-9);
+        }
+
+        @Test
+        void shouldConvertAbsoluteZero_CelsiusToKelvin() {
+            assertEquals(0.0,
+                    temp(-273.15, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.KELVIN).getValue(), 1e-9);
+        }
+
+        @Test
+        void shouldThrowException_whenTargetUnitIsNull() {
+            assertThrows(IllegalArgumentException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).convertTo(null));
+        }
+
+        @Test
+        void shouldReturnCorrectUnit_afterConversion() {
+            assertEquals(TemperatureUnit.FAHRENHEIT,
+                    temp(100.0, TemperatureUnit.CELSIUS).convertTo(TemperatureUnit.FAHRENHEIT).getUnit());
+        }
+    }
+
+
+    // UC14: Unsupported arithmetic operations on temperature
+    @Nested
+    class TemperatureUnsupportedOperationTests {
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onAdd_Celsius() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).add(temp(50.0, TemperatureUnit.CELSIUS)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onSubtract_Celsius() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).subtract(temp(50.0, TemperatureUnit.CELSIUS)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onDivide_Celsius() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).divide(temp(50.0, TemperatureUnit.CELSIUS)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onAdd_Fahrenheit() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(212.0, TemperatureUnit.FAHRENHEIT).add(temp(32.0, TemperatureUnit.FAHRENHEIT)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onSubtract_Fahrenheit() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(212.0, TemperatureUnit.FAHRENHEIT).subtract(temp(32.0, TemperatureUnit.FAHRENHEIT)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onSubtract_Kelvin() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(373.15, TemperatureUnit.KELVIN).subtract(temp(273.15, TemperatureUnit.KELVIN)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onDivide_Kelvin() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(373.15, TemperatureUnit.KELVIN).divide(temp(273.15, TemperatureUnit.KELVIN)));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onSubtractWithTargetUnit() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS)
+                            .subtract(temp(50.0, TemperatureUnit.CELSIUS), TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperationException_onStaticAdd() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> Quantity.add(temp(100.0, TemperatureUnit.CELSIUS),
+                            temp(50.0, TemperatureUnit.CELSIUS),
+                            TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldContainDescriptiveMessage_onUnsupportedOperation() {
+            UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).add(temp(50.0, TemperatureUnit.CELSIUS)));
+            assertNotNull(ex.getMessage());
+            assertFalse(ex.getMessage().isBlank());
+        }
+
+        @Test
+        void shouldThrowUnsupportedOperation_notNullPointer_forAdd() {
+            // Confirm the exception type is exactly UnsupportedOperationException, not NPE
+            Exception ex = assertThrows(UnsupportedOperationException.class,
+                    () -> temp(100.0, TemperatureUnit.CELSIUS).add(temp(0.0, TemperatureUnit.CELSIUS)));
+            assertInstanceOf(UnsupportedOperationException.class, ex);
+        }
+    }
+
+
+    // UC14: Temperature — cross-category type safety
+    @Nested
+    class TemperatureCrossCategoryTests {
+
+        @Test
+        void shouldNotBeEqual_temperatureVsLength() {
+            assertNotEquals((Object) temp(100.0, TemperatureUnit.CELSIUS),
+                    (Object) length(100.0, LengthUnit.FEET));
+        }
+
+        @Test
+        void shouldNotBeEqual_temperatureVsWeight() {
+            assertNotEquals((Object) temp(50.0, TemperatureUnit.CELSIUS),
+                    (Object) weight(50.0, WeightUnit.KILOGRAM));
+        }
+
+        @Test
+        void shouldNotBeEqual_temperatureVsVolume() {
+            assertNotEquals((Object) temp(25.0, TemperatureUnit.CELSIUS),
+                    (Object) volume(25.0, VolumeUnit.LITRE));
+        }
+
+        @Test
+        void shouldNotBeEqual_lengthVsTemperature() {
+            assertNotEquals((Object) length(100.0, LengthUnit.FEET),
+                    (Object) temp(100.0, TemperatureUnit.CELSIUS));
+        }
+    }
+
+
+    // UC14: SupportsArithmetic capability flag
+    @Nested
+    class OperationSupportTests {
+
+        @Test
+        void shouldThrowUnsupportedOperationException_whenValidateOperationCalledOnTemperature() {
+            assertThrows(UnsupportedOperationException.class,
+                    () -> TemperatureUnit.CELSIUS.validateOperationSupport("addition"));
+        }
+
+        @Test
+        void shouldNotThrow_whenValidateOperationCalledOnLength() {
+            assertDoesNotThrow(() -> LengthUnit.FEET.validateOperationSupport("ADD"));
+        }
+
+        @Test
+        void shouldNotThrow_whenValidateOperationCalledOnWeight() {
+            assertDoesNotThrow(() -> WeightUnit.KILOGRAM.validateOperationSupport("SUBTRACT"));
+        }
+
+        @Test
+        void shouldNotThrow_whenValidateOperationCalledOnVolume() {
+            assertDoesNotThrow(() -> VolumeUnit.LITRE.validateOperationSupport("DIVIDE"));
+        }
+    }
+
+
+    // UC14: TemperatureUnit enum structure
+    @Nested
+    class TemperatureUnitEnumTests {
+
+        @Test
+        void shouldHaveCorrectUnitName_Celsius() {
+            assertEquals("Celsius", TemperatureUnit.CELSIUS.getUnitName());
+        }
+
+        @Test
+        void shouldHaveCorrectUnitName_Fahrenheit() {
+            assertEquals("Fahrenheit", TemperatureUnit.FAHRENHEIT.getUnitName());
+        }
+
+        @Test
+        void shouldHaveCorrectUnitName_Kelvin() {
+            assertEquals("Kelvin", TemperatureUnit.KELVIN.getUnitName());
+        }
+
+        @Test
+        void shouldImplementIMeasurable() {
+            assertTrue(TemperatureUnit.CELSIUS instanceof IMeasurable);
+        }
+
+
+        @Test
+        void shouldConvertToBaseUnit_CelsiusToKelvin() {
+            assertEquals(373.15, TemperatureUnit.CELSIUS.convertToBaseUnit(100.0), 1e-9);
+        }
+
+        @Test
+        void shouldConvertFromBaseUnit_KelvinToCelsius() {
+            assertEquals(100.0, TemperatureUnit.CELSIUS.convertFromBaseUnit(373.15), 1e-9);
+        }
+
+        @Test
+        void shouldConvertToBaseUnit_FahrenheitToKelvin() {
+            assertEquals(373.15, TemperatureUnit.FAHRENHEIT.convertToBaseUnit(212.0), 1e-9);
+        }
+
+        @Test
+        void shouldConvertFromBaseUnit_KelvinToFahrenheit() {
+            assertEquals(212.0, TemperatureUnit.FAHRENHEIT.convertFromBaseUnit(373.15), 1e-9);
+        }
+
+        @Test
+        void shouldConvertToBaseUnit_KelvinIdentity() {
+            assertEquals(300.0, TemperatureUnit.KELVIN.convertToBaseUnit(300.0), 1e-9);
+        }
+    }
+
+
+    // UC14: Constructor validation for TemperatureUnit
+    @Nested
+    class TemperatureConstructorValidationTests {
+
+        @Test
+        void shouldThrowException_whenTemperatureUnitIsNull() {
+            assertThrows(IllegalArgumentException.class,
+                    () -> new Quantity<>(100.0, (TemperatureUnit) null));
+        }
+
+        @Test
+        void shouldThrowException_whenTemperatureValueIsNaN() {
+            assertThrows(IllegalArgumentException.class,
+                    () -> new Quantity<>(Double.NaN, TemperatureUnit.CELSIUS));
+        }
+
+        @Test
+        void shouldThrowException_whenTemperatureValueIsInfinite() {
+            assertThrows(IllegalArgumentException.class,
+                    () -> new Quantity<>(Double.POSITIVE_INFINITY, TemperatureUnit.FAHRENHEIT));
+        }
+
+        @Test
+        void shouldReturnFalse_whenEqualsNull() {
+            assertNotEquals(temp(100.0, TemperatureUnit.CELSIUS), null);
+        }
+    }
+
+
+    // UC14: Backward compatibility — UC1–UC13 unaffected by UC14 changes
+    @Nested
+    class BackwardCompatibilityTests {
+
+        @Test
+        void shouldStillAddLength_afterUC14Refactoring() {
+            assertEquals(length(2, LengthUnit.FEET),
+                    length(1, LengthUnit.FEET).add(length(12, LengthUnit.INCHES)));
+        }
+
+        @Test
+        void shouldStillSubtractWeight_afterUC14Refactoring() {
+            assertEquals(weight(5, WeightUnit.KILOGRAM),
+                    weight(10, WeightUnit.KILOGRAM).subtract(weight(5000, WeightUnit.GRAM)));
+        }
+
+        @Test
+        void shouldStillDivideVolume_afterUC14Refactoring() {
+            assertEquals(1.0,
+                    volume(1000, VolumeUnit.MILLILITRE).divide(volume(1, VolumeUnit.LITRE)), 1e-9);
+        }
+
+        @Test
+        void shouldStillConvertLength_afterUC14Refactoring() {
+            assertEquals(length(12, LengthUnit.INCHES),
+                    length(1, LengthUnit.FEET).convertTo(LengthUnit.INCHES));
+        }
+
+        @Test
+        void shouldStillCompareCrossUnit_weight_afterUC14Refactoring() {
+            assertEquals(weight(1, WeightUnit.KILOGRAM), weight(1000, WeightUnit.GRAM));
+        }
+
+        @Test
+        void shouldIMeasurableDefaultsStillWork_forLength() {
+            assertDoesNotThrow(() -> LengthUnit.FEET.validateOperationSupport("ADD"));
         }
     }
 }

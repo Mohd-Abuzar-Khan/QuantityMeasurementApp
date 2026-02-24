@@ -66,6 +66,15 @@ public class QuantityMeasurementApp {
         System.out.println(q1 + " ÷ " + q2 + " = " + q1.divide(q2));
     }
 
+    private static void tryUnsupportedOperation(String label, Runnable action) {
+        try {
+            action.run();
+            System.out.println(label + " → (no exception thrown — unexpected!)");
+        } catch (UnsupportedOperationException e) {
+            System.out.println(label + " → UnsupportedOperationException: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
 
         // UC1–UC4: Length equality — same unit and cross-unit comparisons
@@ -199,5 +208,33 @@ public class QuantityMeasurementApp {
         demonstrateDivision(5.0,    VolumeUnit.LITRE,      10.0,  VolumeUnit.LITRE);
         demonstrateDivision(1000.0, VolumeUnit.MILLILITRE, 1.0,   VolumeUnit.LITRE);
         demonstrateDivision(1.0,    VolumeUnit.GALLON,     3.78541, VolumeUnit.LITRE);
+
+        // UC14 : TemperatureEquality
+        checkEquality(new Quantity<>(0.0,    TemperatureUnit.CELSIUS),    new Quantity<>(32.0,    TemperatureUnit.FAHRENHEIT));
+        checkEquality(new Quantity<>(100.0,  TemperatureUnit.CELSIUS),    new Quantity<>(212.0,   TemperatureUnit.FAHRENHEIT));
+        checkEquality(new Quantity<>(-40.0,  TemperatureUnit.CELSIUS),    new Quantity<>(-40.0,   TemperatureUnit.FAHRENHEIT));
+        checkEquality(new Quantity<>(0.0,    TemperatureUnit.CELSIUS),    new Quantity<>(273.15,  TemperatureUnit.KELVIN));
+        checkEquality(new Quantity<>(100.0,  TemperatureUnit.CELSIUS),    new Quantity<>(373.15,  TemperatureUnit.KELVIN));
+
+        // UC14 : Temperature Conversion
+        demonstrateConversion(100.0,    TemperatureUnit.CELSIUS,    TemperatureUnit.FAHRENHEIT);
+        demonstrateConversion(32.0,     TemperatureUnit.FAHRENHEIT, TemperatureUnit.CELSIUS);
+        demonstrateConversion(273.15,   TemperatureUnit.KELVIN,     TemperatureUnit.CELSIUS);
+        demonstrateConversion(0.0,      TemperatureUnit.CELSIUS,    TemperatureUnit.KELVIN);
+        demonstrateConversion(-40.0,    TemperatureUnit.CELSIUS,    TemperatureUnit.FAHRENHEIT);
+
+        // UC14 : Temperature Unsupported Arithmetic
+        tryUnsupportedOperation("100°C + 50°C",
+                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
+                        .add(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+
+        tryUnsupportedOperation("100°C - 50°C",
+                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
+                        .subtract(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+
+        tryUnsupportedOperation("100°C ÷ 50°C",
+                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
+                        .divide(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+
     }
 }
