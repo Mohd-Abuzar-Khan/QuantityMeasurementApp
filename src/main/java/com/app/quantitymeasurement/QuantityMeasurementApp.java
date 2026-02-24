@@ -117,5 +117,39 @@ public class QuantityMeasurementApp {
         demonstrateAddition(1.0,     WeightUnit.KILOGRAM, 1000.0,  WeightUnit.GRAM,     WeightUnit.GRAM);
         demonstrateAddition(1.0,     WeightUnit.POUND,    453.592, WeightUnit.GRAM,     WeightUnit.POUND);
         demonstrateAddition(2.0,     WeightUnit.KILOGRAM, 4.0,     WeightUnit.POUND,    WeightUnit.KILOGRAM);
+
+         // UC11: Volume equality — same unit and cross-unit comparisons
+         checkEquality(new Quantity<>(1.0,   VolumeUnit.LITRE),       new Quantity<>(1.0,      VolumeUnit.LITRE));
+         checkEquality(new Quantity<>(500.0, VolumeUnit.MILLILITRE),  new Quantity<>(500.0,    VolumeUnit.MILLILITRE));
+         checkEquality(new Quantity<>(1.0,   VolumeUnit.GALLON),      new Quantity<>(1.0,      VolumeUnit.GALLON));
+ 
+         // Cross-unit volume equality: 1 L = 1000 mL, 1 gallon ≈ 3.78541 L
+         checkEquality(new Quantity<>(1.0,      VolumeUnit.LITRE),      new Quantity<>(1000.0,   VolumeUnit.MILLILITRE));
+         checkEquality(new Quantity<>(3.78541,  VolumeUnit.LITRE),      new Quantity<>(1.0,      VolumeUnit.GALLON));
+         checkEquality(new Quantity<>(0.264172, VolumeUnit.GALLON),     new Quantity<>(1.0,      VolumeUnit.LITRE));
+         checkEquality(new Quantity<>(1000.0,   VolumeUnit.MILLILITRE), new Quantity<>(0.264172, VolumeUnit.GALLON));
+ 
+         // UC11: Volume unit-to-unit conversion
+         demonstrateConversion(1.0,    VolumeUnit.LITRE,       VolumeUnit.MILLILITRE);
+         demonstrateConversion(1000.0, VolumeUnit.MILLILITRE,  VolumeUnit.LITRE);
+         demonstrateConversion(1.0,    VolumeUnit.GALLON,      VolumeUnit.LITRE);
+         demonstrateConversion(2.0,    VolumeUnit.GALLON,      VolumeUnit.LITRE);
+         demonstrateConversion(500.0,  VolumeUnit.MILLILITRE,  VolumeUnit.GALLON);
+         demonstrateConversion(3.78541, VolumeUnit.LITRE,      VolumeUnit.GALLON);
+ 
+         // UC11: Volume Quantity-to-Quantity conversion
+         demonstrateConversion(new Quantity<>(2.0, VolumeUnit.LITRE), VolumeUnit.MILLILITRE);
+ 
+         // UC11: Volume addition with implicit target unit
+         demonstrateAddition(1.0,    VolumeUnit.LITRE,      2.0,    VolumeUnit.LITRE);
+         demonstrateAddition(1.0,    VolumeUnit.LITRE,      1000.0, VolumeUnit.MILLILITRE);
+         demonstrateAddition(500.0,  VolumeUnit.MILLILITRE, 0.5,    VolumeUnit.LITRE);
+         demonstrateAddition(2.0,    VolumeUnit.GALLON,     3.78541, VolumeUnit.LITRE);
+ 
+         // UC11: Volume addition with explicit target unit
+         demonstrateAddition(1.0,    VolumeUnit.LITRE,      1000.0,  VolumeUnit.MILLILITRE, VolumeUnit.MILLILITRE);
+         demonstrateAddition(1.0,    VolumeUnit.GALLON,     3.78541, VolumeUnit.LITRE,      VolumeUnit.GALLON);
+         demonstrateAddition(500.0,  VolumeUnit.MILLILITRE, 1.0,     VolumeUnit.LITRE,      VolumeUnit.GALLON);
+         demonstrateAddition(2.0,    VolumeUnit.LITRE,      4.0,     VolumeUnit.GALLON,     VolumeUnit.LITRE);
     }
 }
