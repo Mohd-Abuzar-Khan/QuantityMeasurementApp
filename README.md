@@ -1,4 +1,4 @@
-# 📏 Quantity Measurement Application
+# Quantity Measurement Application
 
 A Java-based application that demonstrates measurement equality comparison using object-oriented principles.
 
@@ -243,9 +243,6 @@ Refactors UC12's `add()`, `subtract()`, and `divide()` to eliminate duplicated v
 
 ## Key Concepts
 - All validation defined once → consistent errors across all operations
-- Adding future operations (MULTIPLY, MODULO) requires only a new enum constant
-- Private helpers reduce each public method to 2–3 lines
-- All UC12 tests pass without modification
 
 ---
 
