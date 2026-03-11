@@ -11,22 +11,18 @@ public class QuantityMeasurementApp {
 
     // Prints equality result
     private static <U extends IMeasurable> void checkEquality(
-            Quantity<U> q1, Quantity<U> q2) {
-        System.out.println(q1 + " and " + q2 +
-                " Equal: " + demonstrateEquality(q1, q2));
+            Quantity<U> q1, Quantity<U> q2) { System.out.println(q1 + " and " + q2 + " Equal: " + demonstrateEquality(q1, q2));
     }
 
     // Unit-to-unit conversion From UC5
     public static <U extends IMeasurable> void demonstrateConversion(double value, U fromUnit, U toUnit) {
         Quantity<U> q = new Quantity<>(value, fromUnit);
-        System.out.println(value + " " + fromUnit.getUnitName() +
-                " is " + q.convertTo(toUnit).getValue() + " " + toUnit.getUnitName());
+        System.out.println(value + " " + fromUnit.getUnitName() + " is " + q.convertTo(toUnit).getValue() + " " + toUnit.getUnitName());
     }
 
     // Quantity-to-quantity conversion From UC5
     public static <U extends IMeasurable> void demonstrateConversion( Quantity<U> q, U toUnit) {
-        System.out.println(q + " converted to " +
-                toUnit.getUnitName() + " is " + q.convertTo(toUnit));
+        System.out.println(q + " converted to " + toUnit.getUnitName() + " is " + q.convertTo(toUnit));
     }
 
     // Implicit addition From UC7
@@ -40,8 +36,7 @@ public class QuantityMeasurementApp {
     public static <U extends IMeasurable> void demonstrateAddition( double value1, U unit1, double value2, U unit2, U targetUnit) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
-        System.out.println("add(" + q1 + ", " + q2 + ", " +
-                targetUnit.getUnitName() + ") → " + Quantity.add(q1, q2, targetUnit));
+        System.out.println("add(" + q1 + ", " + q2 + ", " + targetUnit.getUnitName() + ") → " + Quantity.add(q1, q2, targetUnit));
     }
 
     // Implicit subtraction From UC12
@@ -55,8 +50,7 @@ public class QuantityMeasurementApp {
     public static <U extends IMeasurable> void demonstrateSubtraction( double value1, U unit1, double value2, U unit2, U targetUnit) {
         Quantity<U> q1 = new Quantity<>(value1, unit1);
         Quantity<U> q2 = new Quantity<>(value2, unit2);
-        System.out.println("subtract(" + q1 + ", " + q2 + ", " +
-                targetUnit.getUnitName() + ") → " + q1.subtract(q2, targetUnit));
+        System.out.println("subtract(" + q1 + ", " + q2 + ", " + targetUnit.getUnitName() + ") → " + q1.subtract(q2, targetUnit));
     }
 
     // Division From UC12
@@ -193,7 +187,7 @@ public class QuantityMeasurementApp {
         demonstrateSubtraction(5.0, VolumeUnit.LITRE, 2.0, VolumeUnit.LITRE, VolumeUnit.MILLILITRE);
         demonstrateSubtraction(5.0, VolumeUnit.LITRE, 2.0, VolumeUnit.LITRE, VolumeUnit.GALLON);
 
-        // UC12: Length division — returns a dimensionless scalar ratio
+        // UC12: Length division — returns a scalar ratio
         demonstrateDivision(10.0, LengthUnit.FEET,   2.0,  LengthUnit.FEET);
         demonstrateDivision(10.0, LengthUnit.FEET,   5.0,  LengthUnit.FEET);
         demonstrateDivision(24.0, LengthUnit.INCHES, 2.0,  LengthUnit.FEET);
@@ -224,17 +218,9 @@ public class QuantityMeasurementApp {
         demonstrateConversion(-40.0,    TemperatureUnit.CELSIUS,    TemperatureUnit.FAHRENHEIT);
 
         // UC14 : Temperature Unsupported Arithmetic
-        tryUnsupportedOperation("100°C + 50°C",
-                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
-                        .add(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
-
-        tryUnsupportedOperation("100°C - 50°C",
-                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
-                        .subtract(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
-
-        tryUnsupportedOperation("100°C ÷ 50°C",
-                () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS)
-                        .divide(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+        tryUnsupportedOperation("100°C + 50°C", () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS).add(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+        tryUnsupportedOperation("100°C - 50°C", () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS).subtract(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+        tryUnsupportedOperation("100°C ÷ 50°C", () -> new Quantity<>(100.0, TemperatureUnit.CELSIUS).divide(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
 
     }
 }
