@@ -69,8 +69,6 @@ public class QuantityMeasurementApp {
         System.out.println(q(v1, u1) + " ÷ " + q(v2, u2) + " = " + result);
     }
 
-    // ─── Main ─────────────────────────────────────────────────────────────────
-
     public static void main(String[] args) {
 
         // ── UC1–UC4: Length equality ──────────────────────────────────────────
