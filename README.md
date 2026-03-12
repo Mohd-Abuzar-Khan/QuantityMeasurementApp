@@ -237,9 +237,6 @@ Refactors UC12's `add()`, `subtract()`, and `divide()` to eliminate duplicated v
 | `validateArithmeticOperands()` | Centralized null, category, finiteness checks |
 | `performBaseArithmetic()` | Converts to base unit → executes operation → returns result |
 
-## Two Enum Styles Supported
-- **Abstract method**: Each constant overrides `compute()` — clean for complex logic
-- **Lambda (`DoubleBinaryOperator`)**: Concise, modern functional style
 
 ## Key Concepts
 - All validation defined once → consistent errors across all operations
