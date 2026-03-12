@@ -1,5 +1,7 @@
 package com.app.quantitymeasurement;
 
+import com.app.model.IMeasurable;
+
 public enum VolumeUnit implements IMeasurable {
 
     LITRE(1.0),

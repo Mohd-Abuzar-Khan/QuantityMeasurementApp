@@ -1,5 +1,7 @@
 package com.app.quantitymeasurement;
 
+import com.app.model.IMeasurable;
+
 public enum LengthUnit implements IMeasurable {
 
     FEET(1.0),
@@ -7,7 +9,7 @@ public enum LengthUnit implements IMeasurable {
     YARDS(3.0),
     CENTIMETERS(1.0 / 30.48);
 
-    private final double conversionFactor; // base unit = FEET
+    private final double conversionFactor; 
 
     LengthUnit(double conversionFactor) {
         this.conversionFactor = conversionFactor;
