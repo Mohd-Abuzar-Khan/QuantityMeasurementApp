@@ -1,0 +1,293 @@
+package com.app.service;
+
+import com.app.dto.IMeasureableUnit;
+import com.app.dto.QuantityDTO;
+import com.app.entity.QuantityMeasurementEntity;
+import com.app.exception.QuantityMeasurementException;
+import com.app.model.IMeasurable;
+import com.app.model.QuantityModel;
+import com.app.repository.IQuantityMeasurementRepository;
+
+import java.util.function.DoubleBinaryOperator;
+
+
+public class QuantityMeasurementServiceImpl implements IQuantityMeasurementService {
+
+    private static final double ROUND_FACTOR = 100.0;
+
+    private final IQuantityMeasurementRepository repository;
+
+    // ── Constructor injection ─────────────────────────────────────────────────
+    public QuantityMeasurementServiceImpl(IQuantityMeasurementRepository repository) {
+        if (repository == null)
+            throw new QuantityMeasurementException("Repository cannot be null");
+        this.repository = repository;
+    }
+
+    // ── Internal arithmetic enum ──────────────────────────────────────────────
+    private enum ArithmeticOperation {
+        ADD     ((a, b) -> a + b),
+        SUBTRACT((a, b) -> a - b),
+        DIVIDE  ((a, b) -> a / b);
+
+        private final DoubleBinaryOperator operator;
+        ArithmeticOperation(DoubleBinaryOperator op) { this.operator = op; }
+        double compute(double a, double b)            { return operator.applyAsDouble(a, b); }
+    }
+
+    // ── DTO <-> Model helpers ─────────────────────────────────────────────────
+
+    @SuppressWarnings("unchecked")
+    private <U extends IMeasurable> QuantityModel<U> toModel(QuantityDTO dto) {
+        U unit = (U) dto.getUnit().getMeasurableUnit();
+        return new QuantityModel<>(dto.getValue(), unit);
+    }
+
+    private QuantityDTO toDTO(QuantityModel<?> model, IMeasureableUnit dtoUnit) {
+        return new QuantityDTO(model.getValue(), dtoUnit);
+    }
+
+    private static double round(double value) {
+        return Math.round(value * ROUND_FACTOR) / ROUND_FACTOR;
+    }
+
+    // ── Validation helpers ────────────────────────────────────────────────────
+
+    private void validateNotNull(QuantityDTO dto, String label) {
+        if (dto == null)
+            throw new QuantityMeasurementException(label + " cannot be null");
+    }
+
+    @SuppressWarnings("rawtypes")
+    private void validateSameCategory(QuantityModel q1, QuantityModel q2) {
+        // Use getMeasurementType() string comparison instead of getClass() identity,
+        // because enum constants with abstract method bodies are anonymous subclasses
+        // (e.g. TemperatureUnit$1, TemperatureUnit$2) and getClass() returns different
+        // types even within the same enum — causing false cross-category rejections.
+        String type1 = q1.getUnit().getMeasurementType();
+        String type2 = q2.getUnit().getMeasurementType();
+        if (!type1.equals(type2)) {
+            throw new QuantityMeasurementException("Cannot perform operation on different measurement categories: " + type1 + " and " + type2);
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    private void validateOperationSupport(QuantityModel q, String operation) {
+        try {
+            q.getUnit().validateOperationSupport(operation);
+        } catch (UnsupportedOperationException e) {
+            throw new QuantityMeasurementException("Unsupported operation: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    private double performBaseArithmetic(QuantityModel q1, QuantityModel q2,
+                                         ArithmeticOperation operation) {
+        double base1 = q1.getUnit().convertToBaseUnit(q1.getValue());
+        double base2 = q2.getUnit().convertToBaseUnit(q2.getValue());
+
+        if (operation == ArithmeticOperation.DIVIDE && base2 == 0.0)
+            throw new QuantityMeasurementException("Division by zero: divisor quantity has a base value of zero");
+
+        return operation.compute(base1, base2);
+    }
+
+    // ── IQuantityMeasurementService ───────────────────────────────────────────
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public boolean compare(QuantityDTO q1, QuantityDTO q2) {
+        validateNotNull(q1, "First quantity");
+        validateNotNull(q2, "Second quantity");
+
+        try {
+            QuantityModel m1 = toModel(q1);
+            QuantityModel m2 = toModel(q2);
+            validateSameCategory(m1, m2);
+
+            double base1 = round(m1.getUnit().convertToBaseUnit(m1.getValue()));
+            double base2 = round(m2.getUnit().convertToBaseUnit(m2.getValue()));
+            boolean result = Double.compare(base1, base2) == 0;
+
+            // Persist: comparison returns boolean — store result as "true"/"false"
+            QuantityMeasurementEntity entity = new QuantityMeasurementEntity(
+                "COMPARE",
+                q1.getValue(), q1.getUnit().getUnitName(),
+                q2.getValue(), q2.getUnit().getUnitName(),
+                result ? 1.0 : 0.0, "BOOLEAN");
+            repository.save(entity);
+
+            return result;
+
+        } catch (QuantityMeasurementException e) {
+            repository.save(new QuantityMeasurementEntity(
+                "COMPARE",
+                String.valueOf(q1.getValue()), q1.getUnit().getUnitName(),
+                String.valueOf(q2.getValue()), q2.getUnit().getUnitName(),
+                e.getMessage()));
+            throw e;
+        } catch (Exception e) {
+            throw new QuantityMeasurementException("Comparison failed: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public QuantityDTO convert(QuantityDTO source, QuantityDTO targetUnit) {
+        validateNotNull(source, "Source quantity");
+        validateNotNull(targetUnit, "Target unit");
+
+        try {
+            QuantityModel sourceModel = toModel(source);
+            IMeasurable   target      = targetUnit.getUnit().getMeasurableUnit();
+
+            // same unit — no-op
+            if (sourceModel.getUnit() == target) {
+                repository.save(new QuantityMeasurementEntity(
+                    "CONVERT",
+                    source.getValue(), source.getUnit().getUnitName(),
+                    source.getValue(), targetUnit.getUnit().getUnitName()));
+                return source;
+            }
+
+            double baseValue      = sourceModel.getUnit().convertToBaseUnit(sourceModel.getValue());
+            double convertedValue = round(target.convertFromBaseUnit(baseValue));
+
+            QuantityDTO result = new QuantityDTO(convertedValue, targetUnit.getUnit());
+
+            repository.save(new QuantityMeasurementEntity(
+                "CONVERT",
+                source.getValue(),  source.getUnit().getUnitName(),
+                convertedValue,     targetUnit.getUnit().getUnitName()));
+
+            return result;
+
+        } catch (QuantityMeasurementException e) {
+            repository.save(new QuantityMeasurementEntity(
+                "CONVERT",
+                String.valueOf(source.getValue()), source.getUnit().getUnitName(),
+                null, targetUnit.getUnit().getUnitName(),
+                e.getMessage()));
+            throw e;
+        } catch (Exception e) {
+            throw new QuantityMeasurementException("Conversion failed: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public QuantityDTO add(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit) {
+        validateNotNull(q1, "First operand");
+        validateNotNull(q2, "Second operand");
+        validateNotNull(targetUnit, "Target unit");
+
+        try {
+            QuantityModel m1 = toModel(q1);
+            QuantityModel m2 = toModel(q2);
+
+            validateSameCategory(m1, m2);
+            validateOperationSupport(m1, "addition");
+
+            double baseResult     = performBaseArithmetic(m1, m2, ArithmeticOperation.ADD);
+            IMeasurable target    = targetUnit.getUnit().getMeasurableUnit();
+            double convertedValue = round(target.convertFromBaseUnit(baseResult));
+
+            QuantityDTO result = new QuantityDTO(convertedValue, targetUnit.getUnit());
+
+            repository.save(new QuantityMeasurementEntity(
+                "ADD",
+                q1.getValue(),   q1.getUnit().getUnitName(),
+                q2.getValue(),   q2.getUnit().getUnitName(),
+                convertedValue,  targetUnit.getUnit().getUnitName()));
+
+            return result;
+
+        } catch (QuantityMeasurementException e) {
+            repository.save(new QuantityMeasurementEntity(
+                "ADD",
+                String.valueOf(q1.getValue()), q1.getUnit().getUnitName(),
+                String.valueOf(q2.getValue()), q2.getUnit().getUnitName(),
+                e.getMessage()));
+            throw e;
+        } catch (Exception e) {
+            throw new QuantityMeasurementException("Addition failed: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public QuantityDTO subtract(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit) {
+        validateNotNull(q1, "First operand");
+        validateNotNull(q2, "Second operand");
+        validateNotNull(targetUnit, "Target unit");
+
+        try {
+            QuantityModel m1 = toModel(q1);
+            QuantityModel m2 = toModel(q2);
+
+            validateSameCategory(m1, m2);
+            validateOperationSupport(m1, "subtraction");
+
+            double baseResult     = performBaseArithmetic(m1, m2, ArithmeticOperation.SUBTRACT);
+            IMeasurable target    = targetUnit.getUnit().getMeasurableUnit();
+            double convertedValue = round(target.convertFromBaseUnit(baseResult));
+
+            QuantityDTO result = new QuantityDTO(convertedValue, targetUnit.getUnit());
+
+            repository.save(new QuantityMeasurementEntity(
+                "SUBTRACT",
+                q1.getValue(),   q1.getUnit().getUnitName(),
+                q2.getValue(),   q2.getUnit().getUnitName(),
+                convertedValue,  targetUnit.getUnit().getUnitName()));
+
+            return result;
+
+        } catch (QuantityMeasurementException e) {
+            repository.save(new QuantityMeasurementEntity(
+                "SUBTRACT",
+                String.valueOf(q1.getValue()), q1.getUnit().getUnitName(),
+                String.valueOf(q2.getValue()), q2.getUnit().getUnitName(),
+                e.getMessage()));
+            throw e;
+        } catch (Exception e) {
+            throw new QuantityMeasurementException("Subtraction failed: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    @SuppressWarnings("rawtypes")
+    public double divide(QuantityDTO q1, QuantityDTO q2) {
+        validateNotNull(q1, "Dividend");
+        validateNotNull(q2, "Divisor");
+
+        try {
+            QuantityModel m1 = toModel(q1);
+            QuantityModel m2 = toModel(q2);
+
+            validateSameCategory(m1, m2);
+            validateOperationSupport(m1, "division");
+
+            double ratio = performBaseArithmetic(m1, m2, ArithmeticOperation.DIVIDE);
+            // Division is dimensionless — wrap ratio in a QuantityDTO using q1's unit
+            QuantityDTO result = new QuantityDTO(ratio, q1.getUnit());
+
+            repository.save(new QuantityMeasurementEntity(
+                "DIVIDE",
+                q1.getValue(), q1.getUnit().getUnitName(),
+                q2.getValue(), q2.getUnit().getUnitName(),
+                ratio,         "RATIO"));
+
+            return ratio;
+
+        } catch (QuantityMeasurementException e) {
+            repository.save(new QuantityMeasurementEntity(
+                "DIVIDE",
+                String.valueOf(q1.getValue()), q1.getUnit().getUnitName(),
+                String.valueOf(q2.getValue()), q2.getUnit().getUnitName(),
+                e.getMessage()));
+            throw e;
+        } catch (Exception e) {
+            throw new QuantityMeasurementException("Division failed: " + e.getMessage(), e);
+        }
+    }
+}

@@ -1,19 +1,28 @@
 package com.app.controller;
 
 import com.app.dto.QuantityDTO;
-import com.app.exception.QuantityException;
-import com.app.service.IQuantityService;
+import com.app.exception.QuantityMeasurementException;
+import com.app.service.IQuantityMeasurementService;
 
-public class QuantityController {
+/**
+ * Controller layer — orchestrates user interaction and delegates to the service.
+ * Thin controller: no business logic, only routing, input validation, and display.
+ *
+ * Renamed from QuantityController to QuantityMeasurementController per UC15.
+ * Methods are named performXXX to reflect REST-readiness.
+ */
+public class QuantityMeasurementController {
 
-    private final IQuantityService service;
+    private final IQuantityMeasurementService service;
 
-    public QuantityController(IQuantityService service) {
-        if (service == null) {
-            throw new IllegalArgumentException("Service cannot be null");
-        }
+    // ── Constructor injection (Dependency Injection) ───────────────────────────
+    public QuantityMeasurementController(IQuantityMeasurementService service) {
+        if (service == null)
+            throw new QuantityMeasurementException("Service cannot be null");
         this.service = service;
     }
+
+    // ── API methods ───────────────────────────────────────────────────────────
 
     public boolean performComparison(QuantityDTO q1, QuantityDTO q2) {
         System.out.println("\n── Comparison ──────────────────────────────");
@@ -21,16 +30,10 @@ public class QuantityController {
         System.out.println("  Input 2 : " + formatDTO(q2));
 
         try {
-            validateInputNotNull(q1, "First quantity");
-            validateInputNotNull(q2, "Second quantity");
-
             boolean result = service.compare(q1, q2);
-
-            System.out.println("  Result  : " + q1 + (result ? " == " : " != ") + q2);
             System.out.println("  Equal   : " + result);
             return result;
-
-        } catch (QuantityException e) {
+        } catch (QuantityMeasurementException e) {
             displayError("Comparison failed", e);
             return false;
         }
@@ -42,17 +45,12 @@ public class QuantityController {
         System.out.println("  Target Unit: " + (targetUnit != null ? targetUnit.getUnit() : "null"));
 
         try {
-            validateInputNotNull(source, "Source quantity");
-            validateInputNotNull(targetUnit, "Target unit");
-
             QuantityDTO result = service.convert(source, targetUnit);
-
             displayResult("Converted", result);
             return result;
-
-        } catch (QuantityException e) {
+        } catch (QuantityMeasurementException e) {
             displayError("Conversion failed", e);
-            return null;
+            return new QuantityDTO(Double.NaN, source != null ? source.getUnit() : null);
         }
     }
 
@@ -63,18 +61,12 @@ public class QuantityController {
         System.out.println("  Target Unit: " + (targetUnit != null ? targetUnit.getUnit() : "null"));
 
         try {
-            validateInputNotNull(q1, "First operand");
-            validateInputNotNull(q2, "Second operand");
-            validateInputNotNull(targetUnit, "Target unit");
-
             QuantityDTO result = service.add(q1, q2, targetUnit);
-
             displayResult("Sum", result);
             return result;
-
-        } catch (QuantityException e) {
+        } catch (QuantityMeasurementException e) {
             displayError("Addition failed", e);
-            return null;
+            return new QuantityDTO(Double.NaN, q1 != null ? q1.getUnit() : null);
         }
     }
 
@@ -85,18 +77,12 @@ public class QuantityController {
         System.out.println("  Target Unit: " + (targetUnit != null ? targetUnit.getUnit() : "null"));
 
         try {
-            validateInputNotNull(q1, "First operand");
-            validateInputNotNull(q2, "Second operand");
-            validateInputNotNull(targetUnit, "Target unit");
-
             QuantityDTO result = service.subtract(q1, q2, targetUnit);
-
             displayResult("Difference", result);
             return result;
-
-        } catch (QuantityException e) {
+        } catch (QuantityMeasurementException e) {
             displayError("Subtraction failed", e);
-            return null;
+            return new QuantityDTO(Double.NaN, q1 != null ? q1.getUnit() : null);
         }
     }
 
@@ -105,27 +91,14 @@ public class QuantityController {
         System.out.println("  Dividend : " + formatDTO(q1));
         System.out.println("  Divisor  : " + formatDTO(q2));
 
-        try {
-            validateInputNotNull(q1, "Dividend");
-            validateInputNotNull(q2, "Divisor");
 
             double result = service.divide(q1, q2);
-
             System.out.printf("  Ratio    : %.4f%n", result);
             return result;
-
-        } catch (QuantityException e) {
-            displayError("Division failed", e);
-            return Double.NaN;
-        }
+        
     }
 
-
-    private void validateInputNotNull(QuantityDTO dto, String label) {
-        if (dto == null) {
-            throw QuantityException.nullValue(label);
-        }
-    }
+    // ── Display helpers ───────────────────────────────────────────────────────
 
     private String formatDTO(QuantityDTO dto) {
         if (dto == null) return "null";
@@ -136,12 +109,12 @@ public class QuantityController {
         if (result == null) {
             System.out.println("  " + label + " : null");
         } else {
-            System.out.printf("  %-10s : %.4f %s%n", label, result.getValue(), result.getUnit());
+            System.out.printf("  %-10s : %.4f %s%n",
+                label, result.getValue(), result.getUnit());
         }
     }
 
-    private void displayError(String context, QuantityException e) {
-        System.out.println("  [ERROR] " + context + " → " + e.getMessage()
-            + " (type: " + e.getErrorType() + ")");
+    private void displayError(String context, QuantityMeasurementException e) {
+        System.out.println("  [ERROR] " + context + " → " + e.getMessage());
     }
 }

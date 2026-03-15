@@ -1,4 +1,4 @@
-package com.app.quantitymeasurement;
+package com.app.unit;
 
 import com.app.model.IMeasurable;
 
@@ -7,7 +7,8 @@ public enum WeightUnit implements IMeasurable {
     KILOGRAM(1.0),
     GRAM(0.001),
     TONNE(1000.0),
-    POUND(0.453592);
+    POUND(0.453592),
+    OUNCE(0.0283495);        // 1 ounce = 0.0283495 kg
 
     private final double toKilogramFactor;
 
@@ -30,7 +31,18 @@ public enum WeightUnit implements IMeasurable {
         return this.name();
     }
 
-    
+    // UC15
+    @Override
+    public String getMeasurementType() {
+        return "WeightUnit";
+    }
+
+    // UC15
+    @Override
+    public IMeasurable getUnitByName(String name) {
+        return WeightUnit.valueOf(name.toUpperCase());
+    }
+
     public double getConversionFactor() {
         return toKilogramFactor;
     }

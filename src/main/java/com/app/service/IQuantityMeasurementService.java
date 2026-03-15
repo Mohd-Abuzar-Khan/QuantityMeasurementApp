@@ -4,7 +4,7 @@ import com.app.dto.QuantityDTO;
 import com.app.model.IMeasurable;
 import com.app.model.QuantityModel;
 
-public interface IQuantityService<U extends IMeasurable> {
+public interface IQuantityMeasurementService<U extends IMeasurable> {
 	
 	boolean compare(QuantityDTO q1, QuantityDTO q2);
 	
