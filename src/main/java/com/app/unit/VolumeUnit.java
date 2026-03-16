@@ -1,7 +1,5 @@
 package com.app.unit;
 
-import com.app.model.IMeasurable;
-
 public enum VolumeUnit implements IMeasurable {
 
     LITRE(1.0),
@@ -14,34 +12,11 @@ public enum VolumeUnit implements IMeasurable {
         this.conversionFactor = conversionFactor;
     }
 
-    @Override
-    public double convertToBaseUnit(double value) {
-        return value * conversionFactor;
-    }
+    @Override public double convertToBaseUnit(double value)    { return value * conversionFactor; }
+    @Override public double convertFromBaseUnit(double base)   { return base  / conversionFactor; }
+    @Override public String getUnitName()                      { return this.name(); }
+    @Override public String getMeasurementType()               { return "VolumeUnit"; }
+    @Override public IMeasurable getUnitByName(String name)    { return VolumeUnit.valueOf(name.toUpperCase()); }
 
-    @Override
-    public double convertFromBaseUnit(double baseValue) {
-        return baseValue / conversionFactor;
-    }
-
-    @Override
-    public String getUnitName() {
-        return this.name();
-    }
-
-    // UC15
-    @Override
-    public String getMeasurementType() {
-        return "VolumeUnit";
-    }
-
-    // UC15
-    @Override
-    public IMeasurable getUnitByName(String name) {
-        return VolumeUnit.valueOf(name.toUpperCase());
-    }
-
-    public double getConversionFactor() {
-        return conversionFactor;
-    }
+    public double getConversionFactor() { return conversionFactor; }
 }

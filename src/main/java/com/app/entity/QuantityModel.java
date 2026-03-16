@@ -1,4 +1,6 @@
-package com.app.model;
+package com.app.entity;
+
+import com.app.unit.IMeasurable;
 
 import java.util.Objects;
 
@@ -7,19 +9,19 @@ public class QuantityModel<U extends IMeasurable> {
     private static final double ROUND_FACTOR = 100.0;
 
     private final double value;
-    private final U unit;
+    private final U      unit;
 
     public QuantityModel(double value, U unit) {
         if (unit == null)
             throw new IllegalArgumentException("Unit cannot be null");
         if (Double.isNaN(value) || Double.isInfinite(value))
-            throw new IllegalArgumentException("Invalid numeric value");
+            throw new IllegalArgumentException("Invalid numeric value: " + value);
         this.value = value;
         this.unit  = unit;
     }
 
     public double getValue() { return value; }
-    public U      getUnit()  { return unit; }
+    public U      getUnit()  { return unit;  }
 
     private static double round(double value) {
         return Math.round(value * ROUND_FACTOR) / ROUND_FACTOR;
@@ -30,9 +32,6 @@ public class QuantityModel<U extends IMeasurable> {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         QuantityModel<?> other = (QuantityModel<?>) obj;
-        // Use getMeasurementType() not unit.getClass() — enum constants with abstract
-        // bodies are anonymous subclasses, so getClass() differs across units of the
-        // same measurement type (e.g. CELSIUS != FAHRENHEIT at the class level).
         if (!this.unit.getMeasurementType().equals(other.unit.getMeasurementType())) return false;
         double base1 = round(this.unit.convertToBaseUnit(this.value));
         double base2 = round(other.unit.convertToBaseUnit(other.value));
