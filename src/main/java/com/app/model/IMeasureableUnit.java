@@ -1,4 +1,4 @@
-package com.app.entity;
+package com.app.model;
 
 import com.app.unit.IMeasurable;
 

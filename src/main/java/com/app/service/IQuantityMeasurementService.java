@@ -1,16 +1,28 @@
 package com.app.service;
 
-import com.app.entity.QuantityDTO;
+import com.app.dto.QuantityDTO;
+import com.app.dto.QuantityMeasurementDTO;
+
+import java.util.List;
 
 public interface IQuantityMeasurementService {
 
-    boolean    compare(QuantityDTO q1, QuantityDTO q2);
+    QuantityMeasurementDTO compare(QuantityDTO q1, QuantityDTO q2);
 
-    QuantityDTO convert(QuantityDTO source, QuantityDTO targetUnit);
+    QuantityMeasurementDTO convert(QuantityDTO source, QuantityDTO targetUnit);
 
-    QuantityDTO add(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit);
+    QuantityMeasurementDTO add(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit);
 
-    QuantityDTO subtract(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit);
+    QuantityMeasurementDTO subtract(QuantityDTO q1, QuantityDTO q2, QuantityDTO targetUnit);
 
-    double divide(QuantityDTO q1, QuantityDTO q2);
+    QuantityMeasurementDTO divide(QuantityDTO q1, QuantityDTO q2);
+
+
+    List<QuantityMeasurementDTO> getHistoryByOperation(String operation);
+
+    List<QuantityMeasurementDTO> getHistoryByMeasurementType(String measurementType);
+
+    long getOperationCount(String operation);
+
+    List<QuantityMeasurementDTO> getErrorHistory();
 }

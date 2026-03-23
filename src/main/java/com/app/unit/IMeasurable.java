@@ -3,32 +3,15 @@ package com.app.unit;
 public interface IMeasurable {
 
     double convertToBaseUnit(double value);
-
     double convertFromBaseUnit(double baseValue);
-
     String getUnitName();
-
-    // UC15: returns the measurement category e.g. "LengthUnit", "WeightUnit"
     String getMeasurementType();
-
-    // UC15: returns a unit instance by its name within the same category
     IMeasurable getUnitByName(String name);
 
-    default boolean supportsAddition() {
-        return true;
-    }
-
-    default boolean supportsSubtraction() {
-        return true;
-    }
-
-    default boolean supportsDivision() {
-        return true;
-    }
-
-    default boolean supportsMultiplication() {
-        return true;
-    }
+    default boolean supportsAddition()      { return true; }
+    default boolean supportsSubtraction()   { return true; }
+    default boolean supportsDivision()      { return true; }
+    default boolean supportsMultiplication(){ return true; }
 
     default void validateOperationSupport(String operation) {
         switch (operation.toLowerCase()) {
