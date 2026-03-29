@@ -1,30 +1,17 @@
-package com.app.model;
+package com.app.unit;
 
 public interface IMeasurable {
 
-    // Convert a value to base unit representation
     double convertToBaseUnit(double value);
-    
-    // Convert from base unit back to current unit
     double convertFromBaseUnit(double baseValue);
-
     String getUnitName();
+    String getMeasurementType();
+    IMeasurable getUnitByName(String name);
 
-    default boolean supportsAddition() {
-        return true;
-    }
-
-    default boolean supportsSubtraction() {
-        return true;
-    }
-
-    default boolean supportsDivision() {
-        return true;
-    }
-
-    default boolean supportsMultiplication() {
-        return true;
-    }
+    default boolean supportsAddition()      { return true; }
+    default boolean supportsSubtraction()   { return true; }
+    default boolean supportsDivision()      { return true; }
+    default boolean supportsMultiplication(){ return true; }
 
     default void validateOperationSupport(String operation) {
         switch (operation.toLowerCase()) {
@@ -32,22 +19,18 @@ public interface IMeasurable {
                 if (!supportsAddition())
                     throw new UnsupportedOperationException(getUnitName() + " does not support addition");
                 break;
-
             case "subtraction":
                 if (!supportsSubtraction())
                     throw new UnsupportedOperationException(getUnitName() + " does not support subtraction");
                 break;
-
             case "division":
                 if (!supportsDivision())
                     throw new UnsupportedOperationException(getUnitName() + " does not support division");
                 break;
-
             case "multiplication":
                 if (!supportsMultiplication())
                     throw new UnsupportedOperationException(getUnitName() + " does not support multiplication");
                 break;
-
             default:
                 throw new IllegalArgumentException("Unknown operation: " + operation);
         }
