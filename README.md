@@ -17,7 +17,6 @@ Checks equality of two numerical values in feet, handling null, type mismatch, a
 - Override `equals()` using `Double.compare()` instead of `==`
 - `private final` field for immutability
 - Null & type safety to prevent exceptions
-
 ---
 
 ## UC2: Feet and Inches Measurement Equality
