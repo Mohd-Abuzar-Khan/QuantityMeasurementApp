@@ -1,0 +1,28 @@
+-- ──────────────────────────────────────────────────────────────────────────────
+-- Authentication Service - Database Schema
+-- UC16: Production Schema (H2 / MySQL compatible)
+-- ──────────────────────────────────────────────────────────────────────────────
+
+-- Main users table
+CREATE TABLE IF NOT EXISTS USERS (
+    ID         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    USERNAME   VARCHAR(100) NOT NULL UNIQUE,
+    EMAIL      VARCHAR(150) NOT NULL UNIQUE,
+    NAME       VARCHAR(100),
+    PASSWORD   VARCHAR(100) NOT NULL,
+    CREATED_AT TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- User roles table (many-to-many relationship)
+CREATE TABLE IF NOT EXISTS USER_ROLES (
+    USER_ID    BIGINT       NOT NULL,
+    ROLE       VARCHAR(50)  NOT NULL,
+    PRIMARY KEY (USER_ID, ROLE),
+    FOREIGN KEY (USER_ID) REFERENCES USERS(ID) ON DELETE CASCADE
+);
+
+-- Indexes for performance
+CREATE INDEX IF NOT EXISTS IDX_USERS_USERNAME ON USERS (USERNAME);
+CREATE INDEX IF NOT EXISTS IDX_USERS_EMAIL ON USERS (EMAIL);
+CREATE INDEX IF NOT EXISTS IDX_USER_ROLES_USER_ID ON USER_ROLES (USER_ID);
