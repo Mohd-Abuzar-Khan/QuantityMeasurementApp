@@ -1,0 +1,11 @@
+*.metadata
+*.classpath
+*.class
+*.project
+*.settings
+
+bin
+module-info.java
+QuantityMeasurement-Frontend/node_modules/
+*.properties
+*.yml
