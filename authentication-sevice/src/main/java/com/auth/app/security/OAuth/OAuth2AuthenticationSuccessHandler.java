@@ -1,5 +1,7 @@
 package com.auth.app.security.OAuth;
 
+import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -7,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -16,53 +19,40 @@ import com.auth.app.model.User;
 import com.auth.app.repository.UserRepository;
 import com.auth.app.security.jwt.JwtTokenProvider;
 
-import java.io.IOException;
-import java.util.List;
-
-/**
- * OAuth2 Success Handler
- *
- * Called by Spring Security after a successful Google OAuth2 login.
- *
- * Flow:
- *   1. Extract user info from OAuth2 token (name, email)
- *   2. Upsert user in auth-service's database (create if first login)
- *   3. Issue a JWT
- *   4. Redirect to Angular frontend with the JWT as a query param
- *      → http://localhost:4200/oauth2/callback?token=<jwt>
- */
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtTokenProvider tokenProvider;
-    private final UserRepository   userRepository;
+    private final UserRepository userRepository;
 
     @Value("${app.oauth2.redirect-uri:http://localhost:4200/oauth2/callback}")
     private String frontendRedirectUri;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest  request,
+    public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
-                                        Authentication      authentication) throws IOException {
-        OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+                                        Authentication authentication) throws IOException {
+        OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2User oauth2User = oauthToken.getPrincipal();
+        String provider = oauthToken.getAuthorizedClientRegistrationId();
 
-        String email = oauth2User.getAttribute("email");
-        String name  = oauth2User.getAttribute("name");
+        String login = resolveLogin(provider, oauth2User);
+        String email = resolveEmail(provider, oauth2User, login);
+        String name = resolveName(oauth2User, login);
 
-        // Upsert: if no account exists for this email, create one
         User user = userRepository.findByEmail(email).orElseGet(() -> {
-            String username = email.split("@")[0]; // derive username from email
-            // Ensure uniqueness (collision avoidance)
-            String finalUsername = userRepository.existsByUsername(username)
-                    ? username + "_" + System.currentTimeMillis() : username;
+            String usernameSeed = login;
+            String username = userRepository.existsByUsername(usernameSeed)
+                    ? usernameSeed + "_" + System.currentTimeMillis()
+                    : usernameSeed;
 
             User newUser = User.builder()
-                    .username(finalUsername)
+                    .username(username)
                     .email(email)
                     .name(name)
-                    .password("")           // OAuth2 users have no password
+                    .password("")
                     .roles(List.of("USER"))
                     .active(true)
                     .oauth2User(true)
@@ -70,14 +60,50 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             return userRepository.save(newUser);
         });
 
-        log.info("OAuth2 login success for user: {}", user.getUsername());
+        log.info("OAuth2 login success for provider={} user={}", provider, user.getUsername());
 
-        String token       = tokenProvider.generateToken(user.getUsername());
+        String token = tokenProvider.generateToken(user.getUsername());
         String redirectUrl = UriComponentsBuilder
                 .fromUriString(frontendRedirectUri)
                 .queryParam("token", token)
-                .build().toUriString();
+                .build()
+                .toUriString();
 
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
+    }
+
+    private String resolveLogin(String provider, OAuth2User oauth2User) {
+        if ("github".equalsIgnoreCase(provider)) {
+            String login = oauth2User.getAttribute("login");
+            return hasText(login) ? login : oauth2User.getName();
+        }
+
+        String email = oauth2User.getAttribute("email");
+        if (hasText(email)) {
+            int atIndex = email.indexOf('@');
+            return atIndex > 0 ? email.substring(0, atIndex) : email;
+        }
+
+        return oauth2User.getName();
+    }
+
+    private String resolveEmail(String provider, OAuth2User oauth2User, String login) {
+        String email = oauth2User.getAttribute("email");
+        if (hasText(email)) {
+            return email;
+        }
+        if ("github".equalsIgnoreCase(provider)) {
+            return login + "@users.noreply.github.com";
+        }
+        return login + "@oauth.local";
+    }
+
+    private String resolveName(OAuth2User oauth2User, String fallback) {
+        String name = oauth2User.getAttribute("name");
+        return hasText(name) ? name : fallback;
+    }
+
+    private boolean hasText(String value) {
+        return value != null && !value.isBlank();
     }
 }

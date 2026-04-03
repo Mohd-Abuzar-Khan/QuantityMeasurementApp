@@ -11,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  *   - User registration (POST /api/v1/auth/register)
  *   - User login      (POST /api/v1/auth/login)
  *   - JWT issuance
- *   - Google OAuth2 login
+ *   - GitHub OAuth2 login
  *   - Owns its own H2 database (auth_db) — "database per service" pattern
  *
  * This service registers itself with the Eureka server on startup
