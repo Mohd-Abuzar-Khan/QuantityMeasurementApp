@@ -7,13 +7,18 @@ spring:
 
   # ── Database ──────────────────────────────────────────────────────────────
   datasource:
-    url: jdbc:mysql://junction.proxy.rlwy.net:32405/quantity-db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://junction.proxy.rlwy.net:32405/quantity-db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=60000
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MEASUREMENT_DB_USERNAME:<MEASUREMENT_DB_USERNAME>}
     password: ${MEASUREMENT_DB_PASSWORD:<MEASUREMENT_DB_PASSWORD>}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 300000
+      max-lifetime: 600000
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
@@ -44,8 +49,8 @@ eureka:
     fetch-registry: true          # was nested under service-url (broken)
     register-with-eureka: true    # was nested under service-url (broken)
   instance:
-    prefer-ip-address: false
-    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.uuid}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
 
