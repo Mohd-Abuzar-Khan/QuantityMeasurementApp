@@ -7,17 +7,22 @@ spring:
 
   # ── MySQL ─────────────────────────────────────────────────────────────────
   datasource:
-    url: jdbc:mysql://interchange.proxy.rlwy.net:40649/railway?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://interchange.proxy.rlwy.net:40649/railway?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&connectTimeout=10000&socketTimeout=60000
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${AUTH_DB_USERNAME:<AUTH_DB_USERNAME>}
-    password: ${AUTH_DB_PASSWORD:<AUTH_DB_PASSWORD>}
+    username: root
+    password: cxdKRVyALUJjKFEcrrwZJuVPqNWxIOtk
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 300000
+      max-lifetime: 600000
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: false
-
+    database-platform: org.hibernate.dialect.MySQLDialect
   # ── OAuth2 ─────────────────────────────────────────────────────────────────
   security:
     oauth2:
@@ -51,15 +56,15 @@ spring:
 # ── JWT ───────────────────────────────────────────────────────────────────────
 app:
   jwt:
-    secret: ${AUTH_JWT_SECRET:<AUTH_JWT_SECRET>}
+    secret: BXPcTlmqhNCte2gIYNQvaLcPq0UKU8b6MXTN5PSRj4U
   oauth2:
-    redirect-uri: ${FRONTEND_PUBLIC_URL:https://quantity-measurement-app-frontend-eta.vercel.app}/oauth2/callback
+    redirect-uri: https://quantity-measurement-app-frontend-eta.vercel.app/oauth2/callback
 
 # ── Eureka Client ─────────────────────────────────────────────────────────────
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:https://eureka-server-lsch.onrender.com/eureka/}
+      defaultZone: https://eureka-server-lsch.onrender.com/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
