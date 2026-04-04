@@ -40,7 +40,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_DEFAULT_ZONE:https://eureka-server-lsch.onrender.com/eureka/}
     fetch-registry: true          # was nested under service-url (broken)
     register-with-eureka: true    # was nested under service-url (broken)
   instance:

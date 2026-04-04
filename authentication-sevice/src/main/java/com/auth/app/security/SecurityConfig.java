@@ -77,7 +77,8 @@ public class SecurityConfig {
                 "http://localhost:4200",
                 "http://localhost:3000",
                 "http://127.0.0.1:4200",
-                "http://127.0.0.1:3000"));
+                "http://127.0.0.1:3000",
+                "https://quantity-measurement-app-frontend-eta.vercel.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

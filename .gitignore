@@ -10,5 +10,7 @@ QuantityMeasurement-Frontend/node_modules/
 target/
 **/target/
 *.jar
+credentials.txt
 credentials-placeholders.txt
 
+.env
