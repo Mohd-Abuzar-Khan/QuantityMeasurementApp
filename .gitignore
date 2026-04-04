@@ -1,0 +1,14 @@
+*.metadata
+*.classpath
+*.class
+*.project
+*.settings
+
+bin
+module-info.java
+QuantityMeasurement-Frontend/node_modules/
+target/
+**/target/
+*.jar
+credentials-placeholders.txt
+

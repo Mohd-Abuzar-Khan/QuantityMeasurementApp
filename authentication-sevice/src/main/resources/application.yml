@@ -1,0 +1,92 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: auth-service   # MUST match the gateway route: lb://auth-service
+
+  # ── MySQL ─────────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:mysql://interchange.proxy.rlwy.net:40649/railway?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${AUTH_DB_USERNAME:<AUTH_DB_USERNAME>}
+    password: ${AUTH_DB_PASSWORD:<AUTH_DB_PASSWORD>}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  # ── OAuth2 ─────────────────────────────────────────────────────────────────
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:<GOOGLE_CLIENT_ID>}
+            client-secret: ${GOOGLE_CLIENT_SECRET:<GOOGLE_CLIENT_SECRET>}
+            scope:
+              - email
+              - profile
+            redirect-uri: "http://localhost:8082/login/oauth2/code/google"
+          github:
+            client-id: ${GITHUB_CLIENT_ID:<GITHUB_CLIENT_ID>}
+            client-secret: ${GITHUB_CLIENT_SECRET:<GITHUB_CLIENT_SECRET>}
+            scope:
+              - read:user
+              - user:email
+            redirect-uri: "http://localhost:8082/login/oauth2/code/github"
+
+  # ── Spring Boot Admin Client ───────────────────────────────────────────────
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8090
+#        username: ${ADMIN_CLIENT_USERNAME:<ADMIN_CLIENT_USERNAME>}
+#        password: ${ADMIN_CLIENT_PASSWORD:<ADMIN_CLIENT_PASSWORD>}
+#        instance:
+#          name: auth-service
+
+# ── JWT ───────────────────────────────────────────────────────────────────────
+app:
+  jwt:
+    secret: ${AUTH_JWT_SECRET:<AUTH_JWT_SECRET>}
+  oauth2:
+    redirect-uri: http://localhost:4200/oauth2/callback
+
+# ── Eureka Client ─────────────────────────────────────────────────────────────
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: false
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+# ── Actuator ──────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+# ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.auth: DEBUG
+    org.springframework.security: INFO

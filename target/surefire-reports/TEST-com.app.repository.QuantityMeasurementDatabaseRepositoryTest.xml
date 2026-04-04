@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.259" tests="18" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\target\test-classes;C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\target\classes;C:\Users\abbuz\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\abbuz\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\abbuz\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\abbuz\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\abbuz\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\abbuz\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\abbuz\.m2\repository\org\mockito\mockito-core\5.12.0\mockito-core-5.12.0.jar;C:\Users\abbuz\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.15\byte-buddy-agent-1.14.15.jar;C:\Users\abbuz\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\abbuz\.m2\repository\org\mockito\mockito-junit-jupiter\5.12.0\mockito-junit-jupiter-5.12.0.jar;C:\Users\abbuz\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\abbuz\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\abbuz\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\abbuz\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\abbuz\.m2\repository\net\bytebuddy\byte-buddy\1.14.18\byte-buddy-1.14.18.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="repository.type" value="database"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
+    <property name="sun.java.command" value="C:\Users\abbuz\AppData\Local\Temp\surefire11376685375790890348\surefirebooter-20260322014315994_3.jar C:\Users\abbuz\AppData\Local\Temp\surefire11376685375790890348 2026-03-22T01-43-13_447-jvmRun1 surefire-20260322014315994_1tmp surefire_0-20260322014315994_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\target\test-classes;C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\target\classes;C:\Users\abbuz\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\abbuz\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\abbuz\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\abbuz\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\abbuz\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\abbuz\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\abbuz\.m2\repository\org\mockito\mockito-core\5.12.0\mockito-core-5.12.0.jar;C:\Users\abbuz\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.15\byte-buddy-agent-1.14.15.jar;C:\Users\abbuz\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\abbuz\.m2\repository\org\mockito\mockito-junit-jupiter\5.12.0\mockito-junit-jupiter-5.12.0.jar;C:\Users\abbuz\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\abbuz\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\abbuz\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\abbuz\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\abbuz\.m2\repository\net\bytebuddy\byte-buddy\1.14.18\byte-buddy-1.14.18.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\abbuz"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-25"/>
+    <property name="db.username" value="sa"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\abbuz\AppData\Local\Temp\surefire11376685375790890348\surefirebooter-20260322014315994_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="db.password" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25.0.1+8-LTS-27"/>
+    <property name="user.name" value="abbuz"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="maven.ext.class.path" value="C:\Users\abbuz\.vscode\extensions\oracle.oracle-java-25.0.1\nbcode\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\abbuz\.m2\repository"/>
+    <property name="db.url" value="jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\abbuz\AppData\Local\Temp\"/>
+    <property name="pool.size" value="5"/>
+    <property name="java.version" value="25.0.1"/>
+    <property name="user.dir" value="C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="db.driver" value="org.h2.Driver"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-25\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\abbuz\AppData\Local\Programs\Microsoft VS Code;C:\Python314\Scripts\;C:\Python314\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\abbuz\.local\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\abbuz\AppData\Local\Microsoft\WindowsApps;C:\Users\abbuz\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\abbuz\AppData\Local\Python\bin;C:\Users\abbuz\AppData\Roaming\npm;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.0.1+8-LTS-27"/>
+    <property name="stdin.encoding" value="Cp1252"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="testFindById_ExistingRecord_ReturnsEntity" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.021">
+    <system-out><![CDATA[01:43:19.904 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.908 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.909 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.910 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.910 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.911 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.912 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.912 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.912 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.918 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.918 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.918 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.918 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.920 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:19.920 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.920 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findById(0)
+01:43:19.920 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.921 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.922 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.922 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.922 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:19.923 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.923 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.923 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.923 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testClear_RemovesAllRecords" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.01">
+    <system-out><![CDATA[01:43:19.924 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.925 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.925 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.926 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.926 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.927 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.927 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.927 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.927 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.928 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.928 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.928 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.928 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.929 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [COMPARE] 1.0 FEET 1.0 FEET = 1.0 BOOLEAN
+01:43:19.929 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.929 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.930 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:19.930 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.930 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.931 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 2
+01:43:19.931 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.931 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.931 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.932 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 2 records
+01:43:19.933 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.933 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.933 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 0
+01:43:19.933 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.933 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.933 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.933 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:19.933 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.933 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.933 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.933 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByOperationType_CaseInsensitive" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.008">
+    <system-out><![CDATA[01:43:19.935 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.935 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.936 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.936 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.936 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.937 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.937 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.937 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.937 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.938 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.938 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.938 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.938 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.939 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [COMPARE] 1.0 FEET 1.0 FEET = 1.0 BOOLEAN
+01:43:19.940 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.940 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(compare)
+01:43:19.940 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.941 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(compare) returned 1 records
+01:43:19.941 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.941 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.941 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.941 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:19.941 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.941 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.941 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.942 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByMeasurementType_WeightUnit_ReturnsWeightRecords" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.012">
+    <system-out><![CDATA[01:43:19.943 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.944 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.945 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.945 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.945 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.946 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.946 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.946 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.946 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.947 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.947 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.947 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.947 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.948 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 KILOGRAM 1.0 KILOGRAM = 2.0 KILOGRAM
+01:43:19.949 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.950 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.950 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 1.0 FEET = 2.0 FEET
+01:43:19.950 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.952 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(WeightUnit)
+01:43:19.952 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:19.952 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.952 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 2 records
+01:43:19.952 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.952 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(WeightUnit) returned 1 records
+01:43:19.952 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.952 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.954 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 2 records
+01:43:19.954 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.954 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.954 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.954 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByOperationType_FiltersCorrectly" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.012">
+    <system-out><![CDATA[01:43:19.955 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.956 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.957 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.957 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.958 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.959 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.959 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.959 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.959 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.960 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.960 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.960 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.960 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.961 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 12.0 INCHES = 2.0 FEET
+01:43:19.961 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.961 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.962 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [COMPARE] 1.0 FEET 1.0 FEET = 1.0 BOOLEAN
+01:43:19.962 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.962 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.963 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 KILOGRAM 1.0 KILOGRAM = 2.0 KILOGRAM
+01:43:19.963 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.963 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(ADD)
+01:43:19.963 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.964 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(ADD) returned 2 records
+01:43:19.964 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.965 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.966 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.967 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 3 records
+01:43:19.967 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.967 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.967 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.967 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testCount_AfterMultipleSaves_ReturnsCorrectCount" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.011">
+    <system-out><![CDATA[01:43:19.969 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.969 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.970 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.970 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.971 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.971 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.971 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.971 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.971 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.972 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.972 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.973 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.973 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.975 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [COMPARE] 1.0 FEET 1.0 FEET = 1.0 BOOLEAN
+01:43:19.975 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.975 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.976 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:19.976 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.976 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.977 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 12.0 INCHES = 2.0 FEET
+01:43:19.977 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.977 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.977 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 3
+01:43:19.977 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.977 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.977 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.979 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 3 records
+01:43:19.979 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.979 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.979 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.979 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testSave_ErrorEntity_PersistsWithError" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.009">
+    <system-out><![CDATA[01:43:19.980 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.981 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.982 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.983 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.984 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.984 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.984 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.984 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.984 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.985 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.985 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.985 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.986 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.986 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] ERROR: Temperature does not support addition | Op1: 100.0 CELSIUS | Op2: 50.0 CELSIUS
+01:43:19.987 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.987 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:19.987 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.988 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 1 records
+01:43:19.988 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.988 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.988 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.988 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:19.988 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.989 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.989 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.989 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByMeasurementType_LengthUnit_ReturnsLengthRecords" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.009">
+    <system-out><![CDATA[01:43:19.990 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:19.990 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:19.991 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:19.991 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:19.992 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:19.992 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:19.992 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:19.992 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:19.992 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.994 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:19.994 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.994 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:19.994 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.995 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 12.0 INCHES = 2.0 FEET
+01:43:19.995 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.995 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.996 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [COMPARE] 1.0 KILOGRAM 1.0 KILOGRAM = 1.0 BOOLEAN
+01:43:19.996 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.996 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(LengthUnit)
+01:43:19.996 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:19.996 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.997 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 2 records
+01:43:19.997 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.997 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(LengthUnit) returned 1 records
+01:43:19.997 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:19.997 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:19.998 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 2 records
+01:43:19.998 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:19.998 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:19.998 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:19.998 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByMeasurementType_Unknown_ReturnsEmpty" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.009">
+    <system-out><![CDATA[01:43:20.000 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.002 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.002 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.002 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.003 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.003 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.003 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.003 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.003 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.004 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.004 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.004 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.005 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.005 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 1.0 FEET = 2.0 FEET
+01:43:20.005 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.005 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(UnknownUnit)
+01:43:20.005 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:20.005 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.006 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 1 records
+01:43:20.006 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.006 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByMeasurementType(UnknownUnit) returned 0 records
+01:43:20.007 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.007 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.008 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:20.008 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.008 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.008 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.008 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testSave_TwoOperandEntity_PersistsCorrectly" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.01">
+    <system-out><![CDATA[01:43:20.009 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.009 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.010 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.011 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.011 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.012 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.012 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.012 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.012 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.012 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.013 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.013 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.013 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.015 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [ADD] 1.0 FEET 12.0 INCHES = 2.0 FEET
+01:43:20.016 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.016 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:20.016 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.018 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 1 records
+01:43:20.018 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.018 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.018 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.018 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:20.018 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.018 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.018 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.018 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testGetPoolStatistics_ReturnsNonNullString" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.004">
+    <system-out><![CDATA[01:43:20.020 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.021 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.022 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.022 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.022 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.022 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.022 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.022 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.022 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.023 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.023 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.023 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.023 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.023 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.024 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:20.024 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.024 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.024 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.024 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testSQLInjection_OperationType_TreatedAsLiteral" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.009">
+    <system-out><![CDATA[01:43:20.025 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.026 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.026 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.026 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.028 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.028 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.028 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.028 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.028 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.029 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.029 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.029 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.030 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType('; DROP TABLE QUANTITY_MEASUREMENTS; --)
+01:43:20.030 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.031 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType('; DROP TABLE QUANTITY_MEASUREMENTS; --) returned 0 records
+01:43:20.031 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.031 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.032 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 0
+01:43:20.033 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.033 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.033 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.033 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:20.033 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.033 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.033 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.033 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testLargeDataSet_100Entities_AllPersisted" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.091">
+    <system-out><![CDATA[01:43:20.035 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.036 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.036 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.036 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.036 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.038 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.038 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.038 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.038 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.039 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.039 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.039 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.039 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.040 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 0.0 FEET => 0.0 INCHES
+01:43:20.040 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.040 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.040 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:20.040 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.040 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.041 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 2.0 FEET => 24.0 INCHES
+01:43:20.041 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.041 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.042 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 3.0 FEET => 36.0 INCHES
+01:43:20.042 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.042 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.044 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 4.0 FEET => 48.0 INCHES
+01:43:20.044 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.044 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.045 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 5.0 FEET => 60.0 INCHES
+01:43:20.045 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.045 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.046 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 6.0 FEET => 72.0 INCHES
+01:43:20.046 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.046 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.046 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 7.0 FEET => 84.0 INCHES
+01:43:20.046 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.046 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.048 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 8.0 FEET => 96.0 INCHES
+01:43:20.048 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.048 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.050 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 9.0 FEET => 108.0 INCHES
+01:43:20.050 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.050 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.050 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 10.0 FEET => 120.0 INCHES
+01:43:20.051 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.051 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.051 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 11.0 FEET => 132.0 INCHES
+01:43:20.051 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.051 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.052 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 12.0 FEET => 144.0 INCHES
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.052 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 13.0 FEET => 156.0 INCHES
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.052 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 14.0 FEET => 168.0 INCHES
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.052 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.053 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 15.0 FEET => 180.0 INCHES
+01:43:20.053 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.053 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.054 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 16.0 FEET => 192.0 INCHES
+01:43:20.054 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.054 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.055 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 17.0 FEET => 204.0 INCHES
+01:43:20.055 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.055 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.055 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 18.0 FEET => 216.0 INCHES
+01:43:20.055 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.055 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.056 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 19.0 FEET => 228.0 INCHES
+01:43:20.056 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.056 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.056 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 20.0 FEET => 240.0 INCHES
+01:43:20.056 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.056 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.057 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 21.0 FEET => 252.0 INCHES
+01:43:20.057 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.057 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.057 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 22.0 FEET => 264.0 INCHES
+01:43:20.058 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.058 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.058 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 23.0 FEET => 276.0 INCHES
+01:43:20.058 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.058 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.059 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 24.0 FEET => 288.0 INCHES
+01:43:20.059 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.059 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.059 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 25.0 FEET => 300.0 INCHES
+01:43:20.059 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.059 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.060 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 26.0 FEET => 312.0 INCHES
+01:43:20.060 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.060 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.060 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 27.0 FEET => 324.0 INCHES
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.061 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 28.0 FEET => 336.0 INCHES
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.061 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 29.0 FEET => 348.0 INCHES
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.061 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 30.0 FEET => 360.0 INCHES
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.061 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.063 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 31.0 FEET => 372.0 INCHES
+01:43:20.063 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.063 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.063 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 32.0 FEET => 384.0 INCHES
+01:43:20.063 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.063 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.064 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 33.0 FEET => 396.0 INCHES
+01:43:20.064 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.064 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.064 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 34.0 FEET => 408.0 INCHES
+01:43:20.064 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.064 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.065 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 35.0 FEET => 420.0 INCHES
+01:43:20.065 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.065 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.066 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 36.0 FEET => 432.0 INCHES
+01:43:20.066 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.066 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.066 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 37.0 FEET => 444.0 INCHES
+01:43:20.066 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.066 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.067 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 38.0 FEET => 456.0 INCHES
+01:43:20.067 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.067 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.068 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 39.0 FEET => 468.0 INCHES
+01:43:20.068 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.068 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.068 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 40.0 FEET => 480.0 INCHES
+01:43:20.068 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.068 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.069 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 41.0 FEET => 492.0 INCHES
+01:43:20.069 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.069 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.069 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 42.0 FEET => 504.0 INCHES
+01:43:20.070 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.070 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.070 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 43.0 FEET => 516.0 INCHES
+01:43:20.070 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.070 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.071 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 44.0 FEET => 528.0 INCHES
+01:43:20.071 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.071 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.071 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 45.0 FEET => 540.0 INCHES
+01:43:20.071 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.071 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.073 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 46.0 FEET => 552.0 INCHES
+01:43:20.073 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.073 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.073 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 47.0 FEET => 564.0 INCHES
+01:43:20.073 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.073 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.076 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 48.0 FEET => 576.0 INCHES
+01:43:20.076 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.076 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.077 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 49.0 FEET => 588.0 INCHES
+01:43:20.077 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.077 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.077 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 50.0 FEET => 600.0 INCHES
+01:43:20.077 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.077 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.079 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 51.0 FEET => 612.0 INCHES
+01:43:20.079 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.079 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.079 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 52.0 FEET => 624.0 INCHES
+01:43:20.079 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.079 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.080 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 53.0 FEET => 636.0 INCHES
+01:43:20.080 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.080 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.081 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 54.0 FEET => 648.0 INCHES
+01:43:20.081 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.081 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.081 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 55.0 FEET => 660.0 INCHES
+01:43:20.081 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.081 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.082 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 56.0 FEET => 672.0 INCHES
+01:43:20.082 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.082 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.083 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 57.0 FEET => 684.0 INCHES
+01:43:20.083 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.083 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.084 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 58.0 FEET => 696.0 INCHES
+01:43:20.084 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.084 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.085 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 59.0 FEET => 708.0 INCHES
+01:43:20.085 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.085 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.086 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 60.0 FEET => 720.0 INCHES
+01:43:20.086 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.086 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.086 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 61.0 FEET => 732.0 INCHES
+01:43:20.086 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.086 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.087 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 62.0 FEET => 744.0 INCHES
+01:43:20.087 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.087 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.088 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 63.0 FEET => 756.0 INCHES
+01:43:20.088 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.088 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.088 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 64.0 FEET => 768.0 INCHES
+01:43:20.088 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.088 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.088 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 65.0 FEET => 780.0 INCHES
+01:43:20.089 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.089 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.089 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 66.0 FEET => 792.0 INCHES
+01:43:20.089 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.089 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.090 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 67.0 FEET => 804.0 INCHES
+01:43:20.090 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.090 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.091 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 68.0 FEET => 816.0 INCHES
+01:43:20.091 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.091 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.091 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 69.0 FEET => 828.0 INCHES
+01:43:20.091 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.091 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.092 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 70.0 FEET => 840.0 INCHES
+01:43:20.092 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.092 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.092 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 71.0 FEET => 852.0 INCHES
+01:43:20.092 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.092 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.093 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 72.0 FEET => 864.0 INCHES
+01:43:20.093 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.093 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.093 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 73.0 FEET => 876.0 INCHES
+01:43:20.093 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.093 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.095 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 74.0 FEET => 888.0 INCHES
+01:43:20.095 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.095 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.095 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 75.0 FEET => 900.0 INCHES
+01:43:20.095 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.095 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.096 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 76.0 FEET => 912.0 INCHES
+01:43:20.096 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.096 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.096 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 77.0 FEET => 924.0 INCHES
+01:43:20.096 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.097 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.097 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 78.0 FEET => 936.0 INCHES
+01:43:20.097 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.098 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.101 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 79.0 FEET => 948.0 INCHES
+01:43:20.101 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.101 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.102 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 80.0 FEET => 960.0 INCHES
+01:43:20.102 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.102 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.102 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 81.0 FEET => 972.0 INCHES
+01:43:20.103 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.103 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.103 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 82.0 FEET => 984.0 INCHES
+01:43:20.103 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.103 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.104 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 83.0 FEET => 996.0 INCHES
+01:43:20.104 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.104 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.104 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 84.0 FEET => 1008.0 INCHES
+01:43:20.104 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.104 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.104 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 85.0 FEET => 1020.0 INCHES
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.105 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 86.0 FEET => 1032.0 INCHES
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.105 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 87.0 FEET => 1044.0 INCHES
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.105 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.106 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 88.0 FEET => 1056.0 INCHES
+01:43:20.106 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.106 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.106 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 89.0 FEET => 1068.0 INCHES
+01:43:20.106 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.106 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.107 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 90.0 FEET => 1080.0 INCHES
+01:43:20.107 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.107 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.107 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 91.0 FEET => 1092.0 INCHES
+01:43:20.107 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.107 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.108 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 92.0 FEET => 1104.0 INCHES
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.108 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 93.0 FEET => 1116.0 INCHES
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.108 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 94.0 FEET => 1128.0 INCHES
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.108 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.109 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 95.0 FEET => 1140.0 INCHES
+01:43:20.109 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.109 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.109 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 96.0 FEET => 1152.0 INCHES
+01:43:20.109 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.109 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.109 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 97.0 FEET => 1164.0 INCHES
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.110 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 98.0 FEET => 1176.0 INCHES
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.110 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 99.0 FEET => 1188.0 INCHES
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.110 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.111 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 100
+01:43:20.111 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.111 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:20.111 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.117 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 100 records
+01:43:20.117 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.117 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.117 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.126 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 100 records
+01:43:20.126 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.126 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.126 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.126 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindById_NonExistentIndex_ThrowsDatabaseException" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.009">
+    <system-out><![CDATA[01:43:20.127 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.127 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.128 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.128 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.129 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.129 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.129 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.129 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.130 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.130 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.130 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.130 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.131 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findById(999)
+01:43:20.131 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.132 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.134 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.134 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.134 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:20.134 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.134 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.134 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.134 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testSave_SingleOperandEntity_PersistsCorrectly" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.008">
+    <system-out><![CDATA[01:43:20.136 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.136 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.137 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.138 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.138 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.138 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.138 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.138 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.138 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.140 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.140 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.140 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.140 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.141 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:20.141 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.141 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() invoked
+01:43:20.141 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.142 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findAll() returned 1 records
+01:43:20.142 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.142 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.142 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.142 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:20.142 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.142 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.142 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.142 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testCount_EmptyRepository_ReturnsZero" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.006">
+    <system-out><![CDATA[01:43:20.144 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.144 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.145 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.145 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.145 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.146 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.146 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.146 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.146 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.146 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.146 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.146 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.146 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.146 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 0
+01:43:20.146 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.148 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.148 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.148 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:20.148 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.148 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.148 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.148 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testFindByOperationType_NoMatch_ReturnsEmpty" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.005">
+    <system-out><![CDATA[01:43:20.150 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.150 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.151 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.151 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.151 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.152 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.152 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.152 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.152 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.152 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.152 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.152 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.152 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.153 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- Saved entity: [CONVERT] 1.0 FEET => 12.0 INCHES
+01:43:20.153 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.153 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(DIVIDE)
+01:43:20.153 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.153 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- findByOperationType(DIVIDE) returned 0 records
+01:43:20.153 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.153 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.153 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.154 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 1 records
+01:43:20.154 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.154 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.154 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.154 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+  <testcase name="testSave_NullEntity_DoesNotThrow" classname="com.app.repository.QuantityMeasurementDatabaseRepositoryTest" time="0.005">
+    <system-out><![CDATA[01:43:20.155 [main] INFO com.app.util.ConnectionPool -- Initializing connection pool: size=5, url=jdbc:h2:mem:test_db_repo;DB_CLOSE_DELAY=-1
+01:43:20.156 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #1
+01:43:20.156 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #2
+01:43:20.156 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #3
+01:43:20.158 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #4
+01:43:20.158 [main] DEBUG com.app.util.ConnectionPool -- Created new connection #5
+01:43:20.158 [main] INFO com.app.util.ConnectionPool -- Connection pool initialized with 5 connections
+01:43:20.158 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Initialising QuantityMeasurementDatabaseRepository
+01:43:20.158 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.159 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- DDL executed: tables and indexes verified
+01:43:20.159 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.159 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Schema initialised successfully
+01:43:20.159 [main] WARN com.app.repository.QuantityMeasurementDatabaseRepository -- save() called with null entity – skipping
+01:43:20.159 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.160 [main] DEBUG com.app.repository.QuantityMeasurementDatabaseRepository -- count() = 0
+01:43:20.160 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.160 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Clearing all measurement records
+01:43:20.160 [main] DEBUG com.app.util.ConnectionPool -- Acquired connection (pool remaining: 4)
+01:43:20.160 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Deleted 0 records
+01:43:20.160 [main] DEBUG com.app.util.ConnectionPool -- Released connection (pool size: 5)
+01:43:20.160 [main] INFO com.app.repository.QuantityMeasurementDatabaseRepository -- Releasing database repository resources
+01:43:20.160 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (5 available)
+01:43:20.160 [main] INFO com.app.util.ConnectionPool -- Closing all connections in pool (0 available)
+]]></system-out>
+  </testcase>
+</testsuite>
