@@ -29,14 +29,14 @@ spring:
             scope:
               - email
               - profile
-            redirect-uri: "http://localhost:8082/login/oauth2/code/google"
+            redirect-uri: "${API_GATEWAY_PUBLIC_URL:https://api-gateway-g587.onrender.com}/login/oauth2/code/google"
           github:
             client-id: ${GITHUB_CLIENT_ID:<GITHUB_CLIENT_ID>}
             client-secret: ${GITHUB_CLIENT_SECRET:<GITHUB_CLIENT_SECRET>}
             scope:
               - read:user
               - user:email
-            redirect-uri: "http://localhost:8082/login/oauth2/code/github"
+            redirect-uri: "${API_GATEWAY_PUBLIC_URL:https://api-gateway-g587.onrender.com}/login/oauth2/code/github"
 
   # ── Spring Boot Admin Client ───────────────────────────────────────────────
 #  boot:
@@ -53,18 +53,18 @@ app:
   jwt:
     secret: ${AUTH_JWT_SECRET:<AUTH_JWT_SECRET>}
   oauth2:
-    redirect-uri: http://localhost:4200/oauth2/callback
+    redirect-uri: ${FRONTEND_PUBLIC_URL:https://quantity-measurement-app-frontend-eta.vercel.app}/oauth2/callback
 
 # ── Eureka Client ─────────────────────────────────────────────────────────────
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_DEFAULT_ZONE:https://eureka-server-lsch.onrender.com/eureka/}
     fetch-registry: true
     register-with-eureka: true
   instance:
-    prefer-ip-address: false
-    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.uuid}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
 
