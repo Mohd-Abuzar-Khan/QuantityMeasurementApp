@@ -7,7 +7,7 @@ spring:
 
   # ── Database ──────────────────────────────────────────────────────────────
   datasource:
-    url: jdbc:mysql://localhost:3306/measurement_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://junction.proxy.rlwy.net:32405/quantity-db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MEASUREMENT_DB_USERNAME:<MEASUREMENT_DB_USERNAME>}
     password: ${MEASUREMENT_DB_PASSWORD:<MEASUREMENT_DB_PASSWORD>}
