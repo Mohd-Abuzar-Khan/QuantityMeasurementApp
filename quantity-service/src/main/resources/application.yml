@@ -1,0 +1,75 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: measurement-service   # MUST match gateway route: lb://measurement-service
+
+  # ── Database ──────────────────────────────────────────────────────────────
+  datasource:
+    url: jdbc:mysql://localhost:3306/measurement_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MEASUREMENT_DB_USERNAME:<MEASUREMENT_DB_USERNAME>}
+    password: ${MEASUREMENT_DB_PASSWORD:<MEASUREMENT_DB_PASSWORD>}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  # ── Cloud Config ────────────────────────────────────────────────────────────
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+  # ── Spring Boot Admin Client ───────────────────────────────────────────────
+  boot:
+    admin:
+      client:
+        url: http://localhost:8090
+        username: ${ADMIN_CLIENT_USERNAME:<ADMIN_CLIENT_USERNAME>}
+        password: ${ADMIN_CLIENT_PASSWORD:<ADMIN_CLIENT_PASSWORD>}
+        instance:
+          name: measurement-service
+
+# ── Eureka Client ─────────────────────────────────────────────────────────────
+# FIX: fetch-registry and register-with-eureka were WRONGLY nested inside
+#      service-url in the original file — they must be at the client: level.
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true          # was nested under service-url (broken)
+    register-with-eureka: true    # was nested under service-url (broken)
+  instance:
+    prefer-ip-address: false
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+# ── Actuator ──────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.quantity: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
