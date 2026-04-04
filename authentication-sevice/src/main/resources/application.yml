@@ -22,7 +22,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: false
-
+    database-platform: org.hibernate.dialect.MySQLDialect
   # ── OAuth2 ─────────────────────────────────────────────────────────────────
   security:
     oauth2:
@@ -56,15 +56,15 @@ spring:
 # ── JWT ───────────────────────────────────────────────────────────────────────
 app:
   jwt:
-    secret: ${AUTH_JWT_SECRET:<AUTH_JWT_SECRET>}
+    secret: BXPcTlmqhNCte2gIYNQvaLcPq0UKU8b6MXTN5PSRj4U
   oauth2:
-    redirect-uri: ${FRONTEND_PUBLIC_URL:https://quantity-measurement-app-frontend-eta.vercel.app}/oauth2/callback
+    redirect-uri: https://quantity-measurement-app-frontend-eta.vercel.app/oauth2/callback
 
 # ── Eureka Client ─────────────────────────────────────────────────────────────
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:https://eureka-server-lsch.onrender.com/eureka/}
+      defaultZone: https://eureka-server-lsch.onrender.com/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:
