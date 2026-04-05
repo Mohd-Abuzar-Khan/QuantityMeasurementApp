@@ -2,3 +2,4 @@ com\app\gateway\filter\LoggingFilter.class
 com\app\gateway\ApiGatewayApplication.class
 com\app\gateway\security\JwtGatewayFilter.class
 com\app\gateway\security\JwtUtil.class
+com\app\gateway\security\SecurityHeadersConfig.class
