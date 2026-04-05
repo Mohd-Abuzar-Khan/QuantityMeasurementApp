@@ -31,14 +31,14 @@ spring:
         enabled: true
 
   # ── Spring Boot Admin Client ───────────────────────────────────────────────
-  boot:
-    admin:
-      client:
-        url: http://localhost:8090
-        username: ${ADMIN_CLIENT_USERNAME:<ADMIN_CLIENT_USERNAME>}
-        password: ${ADMIN_CLIENT_PASSWORD:<ADMIN_CLIENT_PASSWORD>}
-        instance:
-          name: measurement-service
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:8090
+#        username: ${ADMIN_CLIENT_USERNAME:<ADMIN_CLIENT_USERNAME>}
+#        password: ${ADMIN_CLIENT_PASSWORD:<ADMIN_CLIENT_PASSWORD>}
+#        instance:
+#          name: measurement-service
 
 # ── Eureka Client ─────────────────────────────────────────────────────────────
 # FIX: fetch-registry and register-with-eureka were WRONGLY nested inside
@@ -46,7 +46,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:https://eureka-server-lsch.onrender.com/eureka/}
+      defaultZone: https://eureka-server-lsch.onrender.com/eureka/
     fetch-registry: true          # was nested under service-url (broken)
     register-with-eureka: true    # was nested under service-url (broken)
   instance:
