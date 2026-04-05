@@ -2,3 +2,4 @@ C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\api-gateway\src\main\jav
 C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\api-gateway\src\main\java\com\app\gateway\filter\LoggingFilter.java
 C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\api-gateway\src\main\java\com\app\gateway\security\JwtGatewayFilter.java
 C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\api-gateway\src\main\java\com\app\gateway\security\JwtUtil.java
+C:\Users\abbuz\Documents\STS-Spring\quantitymeasurement\api-gateway\src\main\java\com\app\gateway\security\SecurityHeadersConfig.java
