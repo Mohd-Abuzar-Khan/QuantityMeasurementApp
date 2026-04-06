@@ -23,6 +23,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Central Spring Security configuration.
@@ -58,6 +59,8 @@ public class SecurityConfig {
     private final CustomUserDetailsService       userDetailsService;
     private final JwtAuthenticationFilter        jwtAuthenticationFilter;
     private final OAuth2AuthenticationSuccessHandler oauth2SuccessHandler;
+    @Value("${app.frontend.origin:https://quantity-measurement-app-frontend-eta.vercel.app}")
+    private String frontendOrigin;
 
     // ── Main filter chain ─────────────────────────────────────────────────────
 
@@ -114,6 +117,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
+            frontendOrigin,
             "http://localhost:4200",   // Angular dev server
             "http://localhost:3000"    // React/Next.js if used
         ));

@@ -1,0 +1,15 @@
+.classpath
+.dockerignore
+.env
+.idea/
+.metadata/
+.project
+.settings/
+*.md
+api-gateway/
+authentication-sevice/
+credentials-placeholders.txt
+credentials.txt
+eureka-server/
+quantity-service/
+QuantityMeasurement-Frontend/
