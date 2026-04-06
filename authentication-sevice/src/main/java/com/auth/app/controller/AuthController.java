@@ -48,7 +48,6 @@ public class AuthController {
 
     // ── POST /register ─────────────────────────────────────────────────────
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
     @Operation(summary = "Register a new user", description = "Creates an account and returns a JWT immediately.")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest req) {
@@ -87,7 +86,6 @@ public class AuthController {
 
     // ── POST /login ──────────────────────────────────────────────────────────
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Authenticates user credentials and returns a JWT.")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest req) {

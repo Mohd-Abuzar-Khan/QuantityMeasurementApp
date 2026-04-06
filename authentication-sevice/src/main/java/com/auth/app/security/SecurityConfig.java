@@ -78,10 +78,14 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "http://127.0.0.1:4200",
                 "http://127.0.0.1:3000",
-                "https://quantity-measurement-app-frontend-eta.vercel.app"));
+                "https://quantity-measurement-app-frontend-eta.vercel.app",
+                "https://quantitymeasurementapp-jivh.onrender.com",
+                "https://auth-server-sks7.onrender.com",
+                "https://api-gateway-g587.onrender.com"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
