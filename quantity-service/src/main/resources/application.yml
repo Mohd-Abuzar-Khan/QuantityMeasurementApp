@@ -65,13 +65,16 @@ management:
     health:
       show-details: always
 
-# ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+# ── Swagger / OpenAPI ─────────────────────────────────────────────────────
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
+    filter: false
+  show-actuator: false
+  paths-to-exclude: /actuator/**
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging:

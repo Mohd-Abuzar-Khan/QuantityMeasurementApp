@@ -45,8 +45,24 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneral(Exception ex) {
+        // Don't catch SpringDoc/Swagger exceptions - let them propagate
+        if (isSwaggerException(ex)) {
+            throw ex;
+        }
         log.error("Unhandled exception: {}", ex.getMessage(), ex);
         return error(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred");
+    }
+
+    /**
+     * Check if exception is related to Swagger/SpringDoc processing.
+     * These should not be caught by the global exception handler.
+     */
+    private boolean isSwaggerException(Exception ex) {
+        String className = ex.getClass().getName();
+        return className.contains("springdoc") ||
+               className.contains("swagger") ||
+               className.contains("openapi") ||
+               (ex.getCause() != null && isSwaggerException((Exception) ex.getCause()));
     }
 
     private ResponseEntity<Map<String, Object>> error(HttpStatusCode status, String message) {
